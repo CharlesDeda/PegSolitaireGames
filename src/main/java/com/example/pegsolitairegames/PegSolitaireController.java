@@ -123,6 +123,8 @@ public class PegSolitaireController{
 
     // application state
     Peg initialPeg;
+
+    ArrayList<Peg> firstAndSecond = new ArrayList<Peg>();
     //https://www.baeldung.com/java-hashmap
     HashMap<String, Peg> pegs = new HashMap<String, Peg>();
 
@@ -134,25 +136,40 @@ public class PegSolitaireController{
     // if we can find the middle we play
     // if we can't we reset one and 2 to not selected
     void play(Peg first, Peg second) {
+        // TODO:
         // be default we are not finding the middle
+        // so this code will have to be properly implemented
 
+        System.out.println("play first: " + first.getId() + " second: " + second.getId());
         first.isSelected = false;
         second.isSelected = false;
-        first.circle.setFill(first.getColor());
-        second.circle.setFill(second.getColor());
+        first.updateCircle();
+        second.updateCircle();
+        firstAndSecond.clear();
+
+//        if (first.getId().equals("4-0") & second.getId().equals("2-0")) {
+//            first.circle.setFill(Color.WHITE);
+//        }
     }
 
     // this func is called when a peg is clicked upon
     void pegClicked(String id) {
-        System.out.print("id: " + id);
+        System.out.println("pegClicked id: " + id);
         // find the peg at this id, there should be just one.
-        Peg selected = pegs.get(id);
+        Peg selectedPeg = pegs.get(id);
+
+        if (selectedPeg == null) {
+            // bail early
+            // and this should not really happen
+            return;
+        }
 
         // configure the initial peg
         if (initialPeg == null) {
-            initialPeg = selected;
+            // now the game can start
+            initialPeg = selectedPeg;
             initialPeg.isEmpty = true;
-            selected.circle.setFill(Color.WHITE);
+            initialPeg.updateCircle();
             return;
         }
 
@@ -162,20 +179,30 @@ public class PegSolitaireController{
         // click again and potentially set the first selection
         // click again and potentially set the second selection
         // now you can play
+
+        // option 1, we derive first and second from the pegs array
+        // option 2, we can use another variable to contain these
+        // option 3, use 2 variables
+        // and finally we have 2 we can play and return
+        // otherwise we continue
         // play(first, second);
 
-        // after first peg is selected, you cannot click again
-        if (selected.isEmpty) {
-            return;
-        }
+        selectedPeg.toggle();
+        selectedPeg.updateCircle();
 
-        if (selected != null) {
-            // we found our peg it has a circle inside and some state
-            // if it's on, turn it off
-            // if off turn it on
-            // then figure the color based on the toggle
-            selected.toggle();
-            selected.circle.setFill(selected.getColor());
+        // if selectedPeg.isSelected and not in the array, add it
+        // if not and in the array, remove it
+        if (selectedPeg.isSelected && !firstAndSecond.contains(selectedPeg)) {
+            firstAndSecond.add(selectedPeg);
+        }
+        if (!selectedPeg.isSelected && firstAndSecond.contains(selectedPeg)) {
+            firstAndSecond.remove(selectedPeg);
+        }
+        
+        // if the array has 2 items, play
+        if (firstAndSecond.size() == 2) {
+            play(firstAndSecond.get(0), firstAndSecond.get(1));
+            return;
         }
     }
 

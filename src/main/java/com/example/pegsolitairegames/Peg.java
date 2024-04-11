@@ -23,11 +23,19 @@ public class Peg {
     }
 
     public Color getColor() {
-        if (isSelected) {
-            return Color.RED;
+        if (isEmpty) {
+            return Color.WHITE;
         } else {
-            return Color.BLUE;
+            if (isSelected) {
+                return Color.RED;
+            } else {
+                return Color.BLUE;
+            }
         }
+    }
+
+    public void updateCircle() {
+        circle.setFill(this.getColor());
     }
 
 }
