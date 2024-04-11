@@ -148,12 +148,10 @@ public class PegSolitaireController{
         firstAndSecond.clear();
 
         // TODO: find the middle, based on first and second and pegs
-        // if no middle we can do shit
+        // if no middle we can't do shit
         // if middle is found we make it empty, the second become not empty, the first become empty
 
-//        if (first.getId().equals("4-0") & second.getId().equals("2-0")) {
-//            first.circle.setFill(Color.WHITE);
-//        }
+
     }
 
     // this func is called when a peg is clicked upon
