@@ -147,6 +147,10 @@ public class PegSolitaireController{
         second.updateCircle();
         firstAndSecond.clear();
 
+        // TODO: find the middle, based on first and second and pegs
+        // if no middle we can do shit
+        // if middle is found we make it empty, the second become not empty, the first become empty
+
 //        if (first.getId().equals("4-0") & second.getId().equals("2-0")) {
 //            first.circle.setFill(Color.WHITE);
 //        }
@@ -198,7 +202,7 @@ public class PegSolitaireController{
         if (!selectedPeg.isSelected && firstAndSecond.contains(selectedPeg)) {
             firstAndSecond.remove(selectedPeg);
         }
-        
+
         // if the array has 2 items, play
         if (firstAndSecond.size() == 2) {
             play(firstAndSecond.get(0), firstAndSecond.get(1));

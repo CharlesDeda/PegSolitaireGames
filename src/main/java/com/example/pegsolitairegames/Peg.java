@@ -14,6 +14,8 @@ public class Peg {
     // initially they are all not empty
     public boolean isEmpty = false;
 
+    // this will be of the shape 1-1 or x-y
+    // the x token is the row, the y token is the column
     public String getId() {
         return circle.getId();
     }
