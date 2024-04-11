@@ -7,7 +7,12 @@ import javafx.scene.shape.Circle;
 public class Peg {
     public Circle circle;
 
-    public boolean isSelected;
+    public boolean isSelected = false;
+
+    // the first peg is empty
+    // and a peg becomes empty or not as we play the game
+    // initially they are all not empty
+    public boolean isEmpty = false;
 
     public String getId() {
         return circle.getId();

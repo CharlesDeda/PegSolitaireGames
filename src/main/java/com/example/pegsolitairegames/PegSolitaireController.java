@@ -119,11 +119,28 @@ public class PegSolitaireController{
     //
     // implement a toggle, each time i click in a peg it turn blue if red and red if blue
     // this is the toggle logic
+    //To start game, click first peg -> goes white
 
     // application state
-    String initialPegID = "";
+    Peg initialPeg;
     //https://www.baeldung.com/java-hashmap
     HashMap<String, Peg> pegs = new HashMap<String, Peg>();
+
+    // we have made 2 selections and we need to run the play
+    // if i can play one becomes empty
+    // peg two becomes not empty and blue
+    // peg in the middle is empty
+    // trick here is to find the middle peg
+    // if we can find the middle we play
+    // if we can't we reset one and 2 to not selected
+    void play(Peg first, Peg second) {
+        // be default we are not finding the middle
+
+        first.isSelected = false;
+        second.isSelected = false;
+        first.circle.setFill(first.getColor());
+        second.circle.setFill(second.getColor());
+    }
 
     // this func is called when a peg is clicked upon
     void pegClicked(String id) {
@@ -131,18 +148,35 @@ public class PegSolitaireController{
         // find the peg at this id, there should be just one.
         Peg selected = pegs.get(id);
 
+        // configure the initial peg
+        if (initialPeg == null) {
+            initialPeg = selected;
+            initialPeg.isEmpty = true;
+            selected.circle.setFill(Color.WHITE);
+            return;
+        }
+
+        // is there another peg selected other than this selected
+        // play scenario
+        // click once and set the first peg
+        // click again and potentially set the first selection
+        // click again and potentially set the second selection
+        // now you can play
+        // play(first, second);
+
+        // after first peg is selected, you cannot click again
+        if (selected.isEmpty) {
+            return;
+        }
+
         if (selected != null) {
-            // we found it and we know it is a circle
+            // we found our peg it has a circle inside and some state
+            // if it's on, turn it off
+            // if off turn it on
+            // then figure the color based on the toggle
             selected.toggle();
             selected.circle.setFill(selected.getColor());
         }
-
-        // if it's on, turn it off
-        // if off turn it on
-        // then figure the color based on the toggle
-        // thePeg[index].toggle()
-        // thePeg[index].setFillColor(isToggle ? Color.RED : Color.BLUE)
-        // Peg0.setFill(Color.RED);
     }
 
     // We have layed out the UI using SceneBuilder
@@ -158,8 +192,8 @@ public class PegSolitaireController{
             Peg newPeg = new Peg();
 
             newPeg.circle = circle;
-            newPeg.isSelected = false;
             pegs.put(newPeg.getId(), newPeg);
+            circle.setFill(newPeg.getColor());
             circle.setOnMouseClicked( event -> {
                 Circle clicked = (Circle)event.getSource();
                 String id = clicked.getId();
