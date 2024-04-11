@@ -113,163 +113,6 @@ public class PegSolitaireController{
 
 
 
-    @FXML
-    void clickedPeg0(MouseEvent event) {
-        Circle clicked = (Circle)event.getSource();
-        String id = clicked.getId();
-        clickedOnPeg(id);
-
-
-        // Peg0.idProperty()
-    }
-
-    @FXML
-    void moveablePeg1(MouseEvent event) {
-        Circle clicked = (Circle)event.getSource();
-        String id = clicked.getId();
-        clickedOnPeg(id);
-    }
-
-    @FXML
-    void moveablePeg10(MouseEvent event) {
-
-    }
-
-    @FXML
-    void moveablePeg11(MouseEvent event) {
-
-    }
-
-    @FXML
-    void moveablePeg12(MouseEvent event) {
-
-    }
-
-    @FXML
-    void moveablePeg13(MouseEvent event) {
-
-    }
-
-    @FXML
-    void moveablePeg14(MouseEvent event) {
-
-    }
-
-    @FXML
-    void moveablePeg2(MouseEvent event) {
-
-    }
-
-    @FXML
-    void moveablePeg3(MouseEvent event) {
-
-    }
-
-    @FXML
-    void moveablePeg4(MouseEvent event) {
-
-    }
-
-    @FXML
-    void moveablePeg5(MouseEvent event) {
-
-    }
-
-    @FXML
-    void moveablePeg6(MouseEvent event) {
-
-    }
-
-    @FXML
-    void moveablePeg7(MouseEvent event) {
-
-    }
-
-    @FXML
-    void moveablePeg8(MouseEvent event) {
-
-    }
-
-    @FXML
-    void moveablePeg9(MouseEvent event) {
-
-    }
-
-    @FXML
-    void peg0Drag(MouseEvent event) {
-
-    }
-
-    @FXML
-    void peg10Drag(MouseEvent event) {
-
-    }
-
-    @FXML
-    void peg11Drag(MouseEvent event) {
-
-    }
-
-    @FXML
-    void peg12Drag(MouseEvent event) {
-
-    }
-
-    @FXML
-    void peg13Drag(MouseEvent event) {
-
-    }
-
-    @FXML
-    void peg14Drag(MouseEvent event) {
-
-    }
-
-    @FXML
-    void peg1Drag(MouseEvent event) {
-
-    }
-
-    @FXML
-    void peg2Drag(MouseEvent event) {
-
-    }
-
-    @FXML
-    void peg3Drag(MouseEvent event) {
-
-    }
-
-    @FXML
-    void peg4Drag(MouseEvent event) {
-
-    }
-
-    @FXML
-    void peg5Drag(MouseEvent event) {
-
-    }
-
-    @FXML
-    void peg6Drag(MouseEvent event) {
-
-    }
-
-    @FXML
-    void peg7Drag(MouseEvent event) {
-
-    }
-
-    @FXML
-    void peg8Drag(MouseEvent event) {
-
-    }
-
-    @FXML
-    void peg9Drag(MouseEvent event) {
-
-    }
-
     // Create list of pegs
     //TODO:
     // after the app starts you need to put all the pegs into an array or list
@@ -283,14 +126,16 @@ public class PegSolitaireController{
     String initialPegID = "";
     ArrayList<Circle> pegs = new ArrayList<Circle>();
 
-    void clickedOnPeg(String id) {
+    // this func is called when a peg is clicked upon
+    void pegClicked(String id) {
         System.out.print("id: " + id);
-        // find the peg at this id
+        // find the peg at this id, there should be just one.
         Optional<Circle> selected = pegs.stream().filter(peg -> {
             return peg.idProperty().getValue().equals(id);
         }).findFirst();
 
         selected.ifPresent(circle -> {
+            // we found it and we know it is a circle
             circle.setFill(Color.RED);
         });
 
@@ -302,17 +147,21 @@ public class PegSolitaireController{
         // Peg0.setFill(Color.RED);
     }
 
-    void pegClicked(MouseEvent event) {
-        Circle clicked = (Circle)event.getSource();
-        String id = clicked.getId();
-        clickedOnPeg(id);
-    }
+    // We have layed out the UI using SceneBuilder
+    // The first thing we do is to set up our data structures that will be used in the rest of the time
+    // It is all about data structures and further more we have to connect UI elements such as Peg0 with our
+    // data structures
+    //
     void didStart() {
         // create the state
         pegs.addAll(Arrays.asList(Peg0, Peg1, Peg2, Peg3, Peg4, Peg5, Peg6, Peg7, Peg8, Peg9, Peg10, Peg11, Peg12, Peg13, Peg14));
+        // set up the clicks
         pegs.forEach(peg -> {
             peg.setOnMouseClicked( event -> {
-                pegClicked(event);
+                Circle clicked = (Circle)event.getSource();
+                String id = clicked.getId();
+
+                pegClicked(id);
             });
         });
     }
