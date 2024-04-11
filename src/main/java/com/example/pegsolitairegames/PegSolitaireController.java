@@ -9,9 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.*;
 
 public class PegSolitaireController{
 
@@ -124,20 +122,20 @@ public class PegSolitaireController{
 
     // application state
     String initialPegID = "";
-    ArrayList<Circle> pegs = new ArrayList<Circle>();
+    //https://www.baeldung.com/java-hashmap
+    HashMap<String, Peg> pegs = new HashMap<String, Peg>();
 
     // this func is called when a peg is clicked upon
     void pegClicked(String id) {
         System.out.print("id: " + id);
         // find the peg at this id, there should be just one.
-        Optional<Circle> selected = pegs.stream().filter(peg -> {
-            return peg.idProperty().getValue().equals(id);
-        }).findFirst();
+        Peg selected = pegs.get(id);
 
-        selected.ifPresent(circle -> {
+        if (selected != null) {
             // we found it and we know it is a circle
-            circle.setFill(Color.RED);
-        });
+            selected.toggle();
+            selected.circle.setFill(selected.getColor());
+        }
 
         // if it's on, turn it off
         // if off turn it on
@@ -154,10 +152,15 @@ public class PegSolitaireController{
     //
     void didStart() {
         // create the state
-        pegs.addAll(Arrays.asList(Peg0, Peg1, Peg2, Peg3, Peg4, Peg5, Peg6, Peg7, Peg8, Peg9, Peg10, Peg11, Peg12, Peg13, Peg14));
+        List<Circle> circles = Arrays.asList(Peg0, Peg1, Peg2, Peg3, Peg4, Peg5, Peg6, Peg7, Peg8, Peg9, Peg10, Peg11, Peg12, Peg13, Peg14);
         // set up the clicks
-        pegs.forEach(peg -> {
-            peg.setOnMouseClicked( event -> {
+        circles.forEach(circle -> {
+            Peg newPeg = new Peg();
+
+            newPeg.circle = circle;
+            newPeg.isSelected = false;
+            pegs.put(newPeg.getId(), newPeg);
+            circle.setOnMouseClicked( event -> {
                 Circle clicked = (Circle)event.getSource();
                 String id = clicked.getId();
 
