@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class PegSolitaireApplication extends Application {
     @Override
@@ -13,8 +14,14 @@ public class PegSolitaireApplication extends Application {
 //        URL url = new File("src/main/java/resources/com/example/pegsolitairegame/pegSolitaire").toURI().toURL();
 //        Parent root = FXMLLoader.load(url);
 //        Parent root = FXMLLoader.load(getClass().getResource("pegSolitaire.fmxl"));
-        FXMLLoader fxmlLoader = new FXMLLoader(PegSolitaireApplication.class.getResource("pegSolitaire.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(),900,490);
+        URL url = PegSolitaireApplication.class.getResource("pegSolitaire.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
+
+        Scene scene = new Scene(fxmlLoader.load(),600,400);
+
+        PegSolitaireController controller = (PegSolitaireController)fxmlLoader.getController();
+
+        controller.didStart();
         stage.setTitle("Peg Solitaire Game");
         stage.setScene(scene);
         stage.show();

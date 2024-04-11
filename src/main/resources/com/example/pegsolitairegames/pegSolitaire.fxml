@@ -5,83 +5,83 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 
-<fx:root fx:id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" type="AnchorPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pegsolitairegames.PegSolitaireController">
+<AnchorPane fx:id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pegsolitairegames.PegSolitaireController">
    <children>
       <Pane fx:id="Box1" layoutX="249.0" layoutY="14.0" prefHeight="71.0" prefWidth="106.0">
          <children>
-            <Circle fx:id="Peg0" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg0Drag" onMouseClicked="#moveablePeg0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="4-0" fx:id="Peg0" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg0Drag" onMouseClicked="#clickedPeg0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
-      <Pane fx:id="Box11" layoutX="30.0" layoutY="315.0" prefHeight="71.0" prefWidth="106.0">
+      <Pane id="0-0" fx:id="Box11" layoutX="30.0" layoutY="315.0" prefHeight="71.0" prefWidth="106.0">
          <children>
-            <Circle fx:id="Peg10" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg10Drag" onMouseClicked="#moveablePeg10" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="0-0" fx:id="Peg10" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg10Drag" onMouseClicked="#moveablePeg10" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="Box12" layoutX="126.0" layoutY="315.0" prefHeight="71.0" prefWidth="106.0">
          <children>
-            <Circle fx:id="Peg11" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg11Drag" onMouseClicked="#moveablePeg11" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="0-1" fx:id="Peg11" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg11Drag" onMouseClicked="#moveablePeg11" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="Box13" layoutX="249.0" layoutY="315.0" prefHeight="71.0" prefWidth="106.0">
          <children>
-            <Circle fx:id="Peg12" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg12Drag" onMouseClicked="#moveablePeg12" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="0-2" fx:id="Peg12" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg12Drag" onMouseClicked="#moveablePeg12" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="Box14" layoutX="355.0" layoutY="315.0" prefHeight="71.0" prefWidth="106.0">
          <children>
-            <Circle fx:id="Peg13" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg13Drag" onMouseClicked="#moveablePeg13" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="0-3" fx:id="Peg13" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg13Drag" onMouseClicked="#moveablePeg13" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="Box15" layoutX="465.0" layoutY="315.0" prefHeight="71.0" prefWidth="106.0">
          <children>
-            <Circle fx:id="Peg14" fill="DODGERBLUE" layoutX="53.0" layoutY="30.0" onDragDetected="#peg14Drag" onMouseClicked="#moveablePeg14" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="0-4" fx:id="Peg14" fill="DODGERBLUE" layoutX="53.0" layoutY="30.0" onDragDetected="#peg14Drag" onMouseClicked="#moveablePeg14" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="Box10" layoutX="408.0" layoutY="243.0" prefHeight="71.0" prefWidth="106.0">
          <children>
-            <Circle fx:id="Peg9" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg9Drag" onMouseClicked="#moveablePeg9" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="1-3" fx:id="Peg9" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg9Drag" onMouseClicked="#moveablePeg9" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="Box9" layoutX="302.0" layoutY="243.0" prefHeight="71.0" prefWidth="106.0">
          <children>
-            <Circle fx:id="Peg8" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg8Drag" onMouseClicked="#moveablePeg8" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="1-2" fx:id="Peg8" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg8Drag" onMouseClicked="#moveablePeg8" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="Box8" layoutX="185.0" layoutY="243.0" prefHeight="71.0" prefWidth="106.0">
          <children>
-            <Circle fx:id="Peg7" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg7Drag" onMouseClicked="#moveablePeg7" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="1-1" fx:id="Peg7" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg7Drag" onMouseClicked="#moveablePeg7" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="Box7" layoutX="73.0" layoutY="243.0" prefHeight="71.0" prefWidth="106.0">
          <children>
-            <Circle fx:id="Peg6" fill="DODGERBLUE" layoutX="61.0" layoutY="36.0" onDragDetected="#peg6Drag" onMouseClicked="#moveablePeg6" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="1-0" fx:id="Peg6" fill="DODGERBLUE" layoutX="62.0" layoutY="36.0" onDragDetected="#peg6Drag" onMouseClicked="#moveablePeg6" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="Box4" layoutX="129.0" layoutY="166.0" prefHeight="71.0" prefWidth="106.0">
          <children>
-            <Circle fx:id="Peg3" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg3Drag" onMouseClicked="#moveablePeg3" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="2-0" fx:id="Peg3" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg3Drag" onMouseClicked="#moveablePeg3" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="Box5" layoutX="233.0" layoutY="158.0" prefHeight="71.0" prefWidth="106.0">
          <children>
-            <Circle fx:id="Peg4" fill="DODGERBLUE" layoutX="61.0" layoutY="36.0" onDragDetected="#peg4Drag" onMouseClicked="#moveablePeg4" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="2-1" fx:id="Peg4" fill="DODGERBLUE" layoutX="61.0" layoutY="36.0" onDragDetected="#peg4Drag" onMouseClicked="#moveablePeg4" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="Box6" layoutX="340.0" layoutY="166.0" prefHeight="71.0" prefWidth="106.0">
          <children>
-            <Circle fx:id="Peg5" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg5Drag" onMouseClicked="#moveablePeg5" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="2-2" fx:id="Peg5" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg5Drag" onMouseClicked="#moveablePeg5" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="Box3" layoutX="302.0" layoutY="86.0" prefHeight="71.0" prefWidth="106.0">
          <children>
-            <Circle fx:id="peg2" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg2Drag" onMouseClicked="#moveablePeg2" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="3-1" fx:id="Peg2" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg2Drag" onMouseClicked="#moveablePeg2" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="Box2" layoutX="185.0" layoutY="86.0" prefHeight="71.0" prefWidth="106.0">
          <children>
-            <Circle fx:id="Peg1" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg1Drag" onMouseClicked="#moveablePeg1" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle id="3-0" fx:id="Peg1" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" onDragDetected="#peg1Drag" onMouseClicked="#moveablePeg1" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Label fx:id="GameScore" alignment="CENTER" layoutX="23.0" layoutY="14.0" prefHeight="32.0" prefWidth="50.0" text="Score" />
    </children>
-</fx:root>
+</AnchorPane>
