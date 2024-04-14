@@ -11,9 +11,6 @@ import java.net.URL;
 public class PegSolitaireApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-//        URL url = new File("src/main/java/resources/com/example/pegsolitairegame/pegSolitaire").toURI().toURL();
-//        Parent root = FXMLLoader.load(url);
-//        Parent root = FXMLLoader.load(getClass().getResource("pegSolitaire.fmxl"));
         URL url = PegSolitaireApplication.class.getResource("pegSolitaire.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(url);
 
