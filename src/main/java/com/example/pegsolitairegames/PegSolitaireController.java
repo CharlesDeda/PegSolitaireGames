@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 import java.util.*;
 
@@ -63,6 +64,9 @@ public class PegSolitaireController{
 
     @FXML
     private Label GameScore;
+
+    @FXML
+    private Text GameScoreLabel;
 
     @FXML
     private Circle Peg0;
@@ -465,6 +469,10 @@ public class PegSolitaireController{
     // It is all about data structures and further more we have to connect UI elements such as Peg0 with our
     // data structures
     //
+
+    int decrementScore(){
+        return Integer.parseInt(GameScoreLabel.getText()) - 1;
+    }
     void didStart() {
         // create the state
         List<Circle> circles = Arrays.asList(Peg0, Peg1, Peg2, Peg3, Peg4, Peg5, Peg6, Peg7, Peg8, Peg9, Peg10, Peg11, Peg12, Peg13, Peg14);
