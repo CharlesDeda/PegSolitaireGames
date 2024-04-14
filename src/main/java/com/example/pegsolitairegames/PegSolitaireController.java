@@ -141,14 +141,255 @@ public class PegSolitaireController{
         // so this code will have to be properly implemented
 
         System.out.println("play first: " + first.getId() + " second: " + second.getId());
-        if(first.getId().equals("0-0") & second.getId().equals("2-0") || second.getId().equals("0-2") & pegs.get("0-2").isEmpty)  {
+        if ((first.getId().equals("0-0") & second.getId().equals("0-2") & pegs.get("0-2").isEmpty) || (first.getId().equals("0-0") & second.getId().equals("2-0") & pegs.get("2-0").isEmpty)){
             first.isEmpty = true;
             first.updateCircle();
-            pegs.get("0-1").isEmpty = true;
-            pegs.get("0-1").updateCircle();
+            if ((first.getId().equals("0-0") & second.getId().equals("0-2"))){
+                pegs.get("0-1").isEmpty = true;
+                pegs.get("0-1").updateCircle();
+            }
+            else{
+                pegs.get("1-0").isEmpty = true;
+                pegs.get("1-0").updateCircle();
+            }
             second.isEmpty = false;
             second.updateCircle();
         }
+
+        if ((first.getId().equals("0-1") & second.getId().equals("0-3") & pegs.get("0-3").isEmpty) || (first.getId().equals("0-1") & second.getId().equals("2-1") & pegs.get("2-1").isEmpty)){
+            first.isEmpty = true;
+            first.updateCircle();
+
+            if ((first.getId().equals("0-1") & second.getId().equals("0-3"))){
+                pegs.get("0-2").isEmpty = true;
+                pegs.get("0-2").updateCircle();
+            }
+            else{
+                pegs.get("1-1").isEmpty = true;
+                pegs.get("1-1").updateCircle();
+            }
+            second.isEmpty = false;
+            second.updateCircle();
+        }
+        if ((first.getId().equals("0-2") & second.getId().equals("2-0") & pegs.get("2-0").isEmpty) || (first.getId().equals("0-2") & second.getId().equals("0-0") & pegs.get("0-0").isEmpty) ||
+                (first.getId().equals("0-2") & second.getId().equals("2-2") & pegs.get("2-2").isEmpty) || (first.getId().equals("0-2") & second.getId().equals("0-4") & pegs.get("0-4").isEmpty)){
+            first.isEmpty = true;
+            first.updateCircle();
+            if ((first.getId().equals("0-2") & second.getId().equals("2-0"))) {
+                pegs.get("1-1").isEmpty = true;
+                pegs.get("1-1").updateCircle();
+            }
+            else if (first.getId().equals("0-2") & second.getId().equals("0-0")){
+                pegs.get("0-1").isEmpty = true;
+                pegs.get("0-1").updateCircle();
+            }
+            else if (first.getId().equals("0-2") & second.getId().equals("2-2")){
+                pegs.get("1-2").isEmpty = true;
+                pegs.get("1-2").updateCircle();
+            } else {
+                pegs.get("0-3").isEmpty = true;
+                pegs.get("0-3").updateCircle();
+            }
+            second.isEmpty = false;
+            second.updateCircle();
+        }
+
+        if (((first.getId().equals("0-3") & second.getId().equals("0-1") & pegs.get("0-1").isEmpty) || (first.getId().equals("0-3") & second.getId().equals("2-1") & pegs.get("2-1").isEmpty))){
+            first.isEmpty = true;
+            first.updateCircle();
+            if ((first.getId().equals("0-3") & second.getId().equals("0-1"))){
+                pegs.get("0-2").isEmpty = true;
+                pegs.get("0-2").updateCircle();
+            }
+            else{
+                pegs.get("1-2").isEmpty = true;
+                pegs.get("1-2").updateCircle();
+            }
+            second.isEmpty = false;
+            second.updateCircle();
+        }
+        if (((first.getId().equals("0-4") & second.getId().equals("2-2") & pegs.get("2-2").isEmpty) || (first.getId().equals("0-4") & second.getId().equals("0-2") & pegs.get("0-2").isEmpty))){
+            first.isEmpty = true;
+            first.updateCircle();
+            if ((first.getId().equals("0-4") & second.getId().equals("2-2"))){
+                pegs.get("1-3").isEmpty = true;
+                pegs.get("1-3").updateCircle();
+            }
+            else{
+                pegs.get("0-2").isEmpty = true;
+                pegs.get("0-2").updateCircle();
+            }
+            second.isEmpty = false;
+            second.updateCircle();
+        }
+        if (((first.getId().equals("1-0") & second.getId().equals("3-0") & pegs.get("3-0").isEmpty) || (first.getId().equals("1-0") & second.getId().equals("1-2") & pegs.get("1-2").isEmpty))){
+            first.isEmpty = true;
+            first.updateCircle();
+            if ((first.getId().equals("1-0") & second.getId().equals("3-0"))){
+                pegs.get("2-0").isEmpty = true;
+                pegs.get("2-0").updateCircle();
+            }
+            else{
+                pegs.get("1-1").isEmpty = true;
+                pegs.get("1-1").updateCircle();
+            }
+            second.isEmpty = false;
+            second.updateCircle();
+        }
+        if (((first.getId().equals("1-1") & second.getId().equals("1-3") & pegs.get("1-3").isEmpty) || (first.getId().equals("1-1") & second.getId().equals("3-1") & pegs.get("3-1").isEmpty))){
+            first.isEmpty = true;
+            first.updateCircle();
+            if ((first.getId().equals("1-1") & second.getId().equals("1-3"))){
+                pegs.get("1-2").isEmpty = true;
+                pegs.get("1-2").updateCircle();
+            }
+            else{
+                pegs.get("2-1").isEmpty = true;
+                pegs.get("2-1").updateCircle();
+            }
+            second.isEmpty = false;
+            second.updateCircle();
+        }
+        if (((first.getId().equals("1-2") & second.getId().equals("1-0") & pegs.get("1-0").isEmpty) || (first.getId().equals("1-2") & second.getId().equals("3-0") & pegs.get("3-0").isEmpty))){
+            first.isEmpty = true;
+            first.updateCircle();
+            if ((first.getId().equals("1-2") & second.getId().equals("1-0"))){
+                pegs.get("1-1").isEmpty = true;
+                pegs.get("1-1").updateCircle();
+            }
+            else{
+                pegs.get("2-1").isEmpty = true;
+                pegs.get("2-1").updateCircle();
+            }
+            second.isEmpty = false;
+            second.updateCircle();
+        }
+
+        if (((first.getId().equals("1-3") & second.getId().equals("3-1") & pegs.get("3-1").isEmpty) || (first.getId().equals("1-3") & second.getId().equals("1-1") & pegs.get("1-1").isEmpty))){
+            first.isEmpty = true;
+            first.updateCircle();
+            if ((first.getId().equals("1-3") & second.getId().equals("3-1"))){
+                pegs.get("2-2").isEmpty = true;
+                pegs.get("2-2").updateCircle();
+            }
+            else{
+                pegs.get("1-2").isEmpty = true;
+                pegs.get("1-2").updateCircle();
+            }
+            second.isEmpty = false;
+            second.updateCircle();
+        }
+
+        if ((first.getId().equals("2-0") & second.getId().equals("0-0") & pegs.get("0-0").isEmpty) || (first.getId().equals("2-0") & second.getId().equals("4-0") & pegs.get("4-0").isEmpty) ||
+                (first.getId().equals("2-0") & second.getId().equals("2-2") & pegs.get("2-2").isEmpty) || (first.getId().equals("2-0") & second.getId().equals("0-2") & pegs.get("0-2").isEmpty)){
+            first.isEmpty = true;
+            first.updateCircle();
+            if ((first.getId().equals("2-0") & second.getId().equals("0-0"))) {
+                pegs.get("1-0").isEmpty = true;
+                pegs.get("1-0").updateCircle();
+            }
+            else if (first.getId().equals("2-0") & second.getId().equals("0-2")){
+                pegs.get("1-1").isEmpty = true;
+                pegs.get("1-1").updateCircle();
+            }
+            else if (first.getId().equals("2-0") & second.getId().equals("2-2")){
+                pegs.get("2-1").isEmpty = true;
+                pegs.get("2-1").updateCircle();
+
+            } else {
+                pegs.get("3-0").isEmpty = true;
+                pegs.get("3-0").updateCircle();
+            }
+            second.isEmpty = false;
+            second.updateCircle();
+        }
+
+        if (((first.getId().equals("2-1") & second.getId().equals("0-1") & pegs.get("0-1").isEmpty) || (first.getId().equals("2-1") & second.getId().equals("0-3") & pegs.get("0-3").isEmpty))){
+            first.isEmpty = true;
+            first.updateCircle();
+
+            if ((first.getId().equals("2-1") & second.getId().equals("0-1"))){
+                pegs.get("1-1").isEmpty = true;
+                pegs.get("1-1").updateCircle();
+            }
+            else{
+                pegs.get("1-2").isEmpty = true;
+                pegs.get("1-2").updateCircle();
+            }
+            second.isEmpty = false;
+            second.updateCircle();
+        }
+
+        if ((first.getId().equals("2-2") & second.getId().equals("2-0") & pegs.get("2-0").isEmpty) || (first.getId().equals("2-2") & second.getId().equals("4-0") & pegs.get("4-0").isEmpty) ||
+                (first.getId().equals("2-2") & second.getId().equals("0-4") & pegs.get("0-4").isEmpty) || (first.getId().equals("2-0") & second.getId().equals("0-2") & pegs.get("0-2").isEmpty)){
+            first.isEmpty = true;
+            first.updateCircle();
+
+            if ((first.getId().equals("2-2") & second.getId().equals("2-0"))) {
+                pegs.get("2-1").isEmpty = true;
+                pegs.get("2-1").updateCircle();
+            }
+            else if (first.getId().equals("2-2") & second.getId().equals("0-4")){
+                pegs.get("1-3").isEmpty = true;
+                pegs.get("1-3").updateCircle();
+            }
+            else if (first.getId().equals("2-2") & second.getId().equals("0-2")){
+                pegs.get("1-1").isEmpty = true;
+                pegs.get("1-1").updateCircle();
+
+            } else {
+                pegs.get("3-1").isEmpty = true;
+                pegs.get("3-1").updateCircle();
+            }
+            second.isEmpty = false;
+            second.updateCircle();
+        }
+
+        if (((first.getId().equals("3-0") & second.getId().equals("1-0") & pegs.get("1-0").isEmpty) || (first.getId().equals("3-0") & second.getId().equals("1-3") & pegs.get("1-3").isEmpty))){
+            first.isEmpty = true;
+            first.updateCircle();
+            if ((first.getId().equals("3-0") & second.getId().equals("1-0"))){
+                pegs.get("2-0").isEmpty = true;
+                pegs.get("2-0").updateCircle();
+            }
+            else{
+                pegs.get("2-1").isEmpty = true;
+                pegs.get("2-1").updateCircle();
+            }
+            second.isEmpty = false;
+            second.updateCircle();
+        }
+
+        if (((first.getId().equals("3-1") & second.getId().equals("1-1") & pegs.get("1-1").isEmpty) || (first.getId().equals("3-0") & second.getId().equals("1-3") & pegs.get("1-3").isEmpty))){
+            first.isEmpty = true;
+            first.updateCircle();
+            if ((first.getId().equals("3-1") & second.getId().equals("1-1"))){
+                pegs.get("2-1").isEmpty = true;
+                pegs.get("2-1").updateCircle();
+            }
+            else{
+                pegs.get("2-2").isEmpty = true;
+                pegs.get("2-2").updateCircle();
+            }
+            second.isEmpty = false;
+            second.updateCircle();
+        }
+
+        if (((first.getId().equals("4-0") & second.getId().equals("2-0") & pegs.get("2-0").isEmpty) || (first.getId().equals("4-0") & second.getId().equals("2-2") & pegs.get("2-2").isEmpty))){
+            first.isEmpty = true;
+            first.updateCircle();
+            if ((first.getId().equals("4-0") & second.getId().equals("2-0"))){
+                pegs.get("3-0").isEmpty = true;
+                pegs.get("3-0").updateCircle();
+            }
+            else{
+                pegs.get("3-1").isEmpty = true;
+                pegs.get("3-1").updateCircle();
+            }
+            second.isEmpty = false;
+            second.updateCircle();
+        }
+
         first.isSelected = false;
         second.isSelected = false;
         first.updateCircle();
