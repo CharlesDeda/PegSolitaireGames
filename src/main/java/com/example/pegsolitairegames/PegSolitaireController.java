@@ -141,11 +141,22 @@ public class PegSolitaireController{
         // so this code will have to be properly implemented
 
         System.out.println("play first: " + first.getId() + " second: " + second.getId());
+        if(first.getId().equals("0-0") & second.getId().equals("2-0") || second.getId().equals("0-2")) {
+            first.isEmpty = true;
+            first.updateCircle();
+            pegs.get("0-1").isEmpty = true;
+            pegs.get("0-1").updateCircle();
+            second.isEmpty = false;
+            second.updateCircle();
+        }
         first.isSelected = false;
         second.isSelected = false;
         first.updateCircle();
         second.updateCircle();
         firstAndSecond.clear();
+
+
+
 
         // TODO: find the middle, based on first and second and pegs
         // if no middle we can't do shit
