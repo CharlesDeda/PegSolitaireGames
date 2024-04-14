@@ -141,7 +141,7 @@ public class PegSolitaireController{
         // so this code will have to be properly implemented
 
         System.out.println("play first: " + first.getId() + " second: " + second.getId());
-        if(first.getId().equals("0-0") & second.getId().equals("2-0") || second.getId().equals("0-2")) {
+        if(first.getId().equals("0-0") & second.getId().equals("2-0") || second.getId().equals("0-2") & pegs.get("0-2").isEmpty)  {
             first.isEmpty = true;
             first.updateCircle();
             pegs.get("0-1").isEmpty = true;
