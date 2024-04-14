@@ -5,7 +5,8 @@ import javafx.scene.shape.Circle;
 
 // This is our data structure to keep together the ui peg and some state that goes with it.
 public class Peg {
-
+    public int row;
+    public int column;
     public Circle circle;
 
     public boolean isSelected = false;
@@ -20,7 +21,12 @@ public class Peg {
     public String getId() {
         return circle.getId();
     }
-
+    public int getRow() {
+        return Integer.parseInt("0" + circle.getId().charAt(0));
+    }
+    public int getColumn() {
+        return Integer.parseInt("0" + circle.getId().charAt(2));
+    }
 
     public void toggle() {
         isSelected = !isSelected;

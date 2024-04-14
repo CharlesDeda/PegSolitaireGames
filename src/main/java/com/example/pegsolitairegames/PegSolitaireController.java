@@ -127,6 +127,8 @@ public class PegSolitaireController{
     ArrayList<Peg> firstAndSecond = new ArrayList<Peg>();
     //https://www.baeldung.com/java-hashmap
     HashMap<String, Peg> pegs = new HashMap<String, Peg>();
+    ArrayList<Peg> pegsCheck = new ArrayList<Peg>();
+
 
     // we have made 2 selections and we need to run the play
     // if i can play one becomes empty
@@ -141,13 +143,19 @@ public class PegSolitaireController{
         // so this code will have to be properly implemented
 
         System.out.println("play first: " + first.getId() + " second: " + second.getId());
-        if(first.getId().equals("0-0") & second.getId().equals("2-0") || second.getId().equals("0-2") & pegs.get("0-2").isEmpty)  {
-            first.isEmpty = true;
-            first.updateCircle();
-            pegs.get("0-1").isEmpty = true;
-            pegs.get("0-1").updateCircle();
-            second.isEmpty = false;
-            second.updateCircle();
+        //find higher row & column value and subtract 1, highest value peg and middle difference peg is removed (white), first goes to blue
+        System.out.println("rowID: " + second.getRow());
+        for(int i = 0; i < pegsCheck.size(); i++) {
+            if(second.isEmpty & second.getRow() > first.getRow() || second.getColumn() > first.getColumn()) {
+                if(second.getRow() == pegsCheck.get(i).getRow() & second.getColumn() == pegsCheck.get(i).getColumn()) {
+                first.isEmpty = true;
+                first.updateCircle();
+                pegsCheck.get(i).isEmpty = true;
+                pegsCheck.get(i).updateCircle();
+                second.isEmpty = false;
+                second.updateCircle();
+                }
+            }
         }
         first.isSelected = false;
         second.isSelected = false;
@@ -165,6 +173,11 @@ public class PegSolitaireController{
 
     }
 
+    Peg pegBetween(Peg first, Peg second) {
+        for (int i = 0; i < pegsCheck.size(); i++) {
+            if second.
+        }
+    }
     // this func is called when a peg is clicked upon
     void pegClicked(String id) {
         System.out.println("pegClicked id: " + id);
@@ -230,9 +243,12 @@ public class PegSolitaireController{
         // set up the clicks
         circles.forEach(circle -> {
             Peg newPeg = new Peg();
+            Peg pegCheck = new Peg();
 
             newPeg.circle = circle;
+            pegCheck.circle = circle;
             pegs.put(newPeg.getId(), newPeg);
+            pegsCheck.add(pegCheck);
             circle.setFill(newPeg.getColor());
             circle.setOnMouseClicked( event -> {
                 Circle clicked = (Circle)event.getSource();
