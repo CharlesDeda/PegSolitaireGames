@@ -467,12 +467,14 @@ public class PegSolitaireController{
     // from there, we send the list to the nextTO method and that method will check to see if there are any valid moves
     // aka pegs close enough to each other.
     boolean nextTo(ArrayList <Peg> nonEmpty){
+        ArrayList<int> xAxisPeg = new ArrayList<>();
 
         for(Peg val : nonEmpty){
-            String ID = val.getId();
 
-            String xAxis = ID[0];
-            String yAxis = ID[2];
+            String xAxis = val.getRow();  // to check all moves, you can add 1 and subtract one from X and Y axis o determine if there are pegs there.
+            String yAxis = val.getColumn();
+
+            if (xAxis + 1 & yAxis + 1) in
         }
     }
 
@@ -482,7 +484,7 @@ public class PegSolitaireController{
         int count = 0;
         pegs.forEach(peg -> {
             if(peg.isEmpty() != false) {
-                leftoverPeg.add(peg);
+                leftoverPeg.add();
 
         });
         return leftoverPeg;
