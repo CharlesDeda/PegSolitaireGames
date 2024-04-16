@@ -141,13 +141,12 @@ public class PegSolitaireController{
         // TODO:
         // be default we are not finding the middle
         // so this code will have to be properly implemented
-        Peg middlePeg = new Peg();
         System.out.println("play first: " + first.getId() + " second: " + second.getId());
         //find higher row & column value and subtract 1, highest value peg and middle difference peg is removed (white), first goes to blue
         System.out.println("rowID: " + second.getRow());
 
 
-        middlePeg = pegBetween(first, second);
+        Peg middlePeg = pegBetween(first, second);
         System.out.println("Middle peg" + middlePeg.getRow() + middlePeg.getColumn());
         first.isEmpty = true;
         first.updateCircle();

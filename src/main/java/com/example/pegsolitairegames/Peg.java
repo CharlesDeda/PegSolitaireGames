@@ -30,7 +30,7 @@ public class Peg {
         return Integer.parseInt("0" + circle.getId().charAt(2));
     }
 
-    public void setId(String ID) {return this.id = id;} 
+    public void setId(String ID) {this.id = id;}
 
     public void setRow(int row) {this.row = row;}
     public void setColumn(int column) {
