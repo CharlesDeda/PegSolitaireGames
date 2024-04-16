@@ -141,22 +141,11 @@ public class PegSolitaireController{
         // TODO:
         // be default we are not finding the middle
         // so this code will have to be properly implemented
-
+        Peg middlePeg = new Peg();
         System.out.println("play first: " + first.getId() + " second: " + second.getId());
         //find higher row & column value and subtract 1, highest value peg and middle difference peg is removed (white), first goes to blue
         System.out.println("rowID: " + second.getRow());
-        for(int i = 0; i < pegsCheck.size(); i++) {
-            if(second.isEmpty & second.getRow() > first.getRow() || second.getColumn() > first.getColumn()) {
-                if(second.getRow() == pegsCheck.get(i).getRow() & second.getColumn() == pegsCheck.get(i).getColumn()) {
-                first.isEmpty = true;
-                first.updateCircle();
-                pegsCheck.get(i).isEmpty = true;
-                pegsCheck.get(i).updateCircle();
-                second.isEmpty = false;
-                second.updateCircle();
-                }
-            }
-        }
+        middlePeg = pegBetween(first, second);
         first.isSelected = false;
         second.isSelected = false;
         first.updateCircle();
@@ -174,9 +163,26 @@ public class PegSolitaireController{
     }
 
     Peg pegBetween(Peg first, Peg second) {
+        Peg cPeg = new Peg();
+        int maxColumn = 0;
+        int maxRow = 0;
         for (int i = 0; i < pegsCheck.size(); i++) {
-            if second.
+            if (first.getRow() == second.getRow() & first.getColumn() != second.getColumn()) {
+                maxColumn = Math.max(first.getColumn(), second.getColumn());
+                cPeg.setColumn(maxColumn-1);
+                cPeg.setRow(first.getRow());
+            } else if (first.getRow() != second.getRow() & first.getColumn() == second.getColumn()) {
+                maxRow = Math.max(first.getRow(), second.getRow());
+                cPeg.setColumn(first.getColumn());
+                cPeg.setRow(maxRow-1);
+            } else {
+                maxRow = Math.max(first.getRow(), second.getRow());
+                maxColumn = Math.max(first.getColumn(), second.getColumn());
+                cPeg.setColumn(maxColumn-1);
+                cPeg.setRow(maxRow-1);
+            }
         }
+        return cPeg;
     }
     // this func is called when a peg is clicked upon
     void pegClicked(String id) {

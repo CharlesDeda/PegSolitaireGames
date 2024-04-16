@@ -28,6 +28,11 @@ public class Peg {
         return Integer.parseInt("0" + circle.getId().charAt(2));
     }
 
+    public void setRow(int row) {this.row = row;}
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
     public void toggle() {
         isSelected = !isSelected;
     }
