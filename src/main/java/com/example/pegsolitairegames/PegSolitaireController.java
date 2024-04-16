@@ -463,6 +463,32 @@ public class PegSolitaireController{
 
     int decrementScore() {return Integer.parseInt(GameScoreLabel.getText()) - 1;}
 
+    // Current thought: Continue with the idea that we check empty pegs and put the ones that are not empty into a list
+    // from there, we send the list to the nextTO method and that method will check to see if there are any valid moves
+    // aka pegs close enough to each other.
+    boolean nextTo(ArrayList <Peg> nonEmpty){
+
+        for(Peg val : nonEmpty){
+            String ID = val.getId();
+
+            String xAxis = ID[0];
+            String yAxis = ID[2];
+        }
+    }
+
+    boolean gameOver() {
+        ArrayList<Peg> leftoverPeg = new ArrayList<Peg>();
+
+        int count = 0;
+        pegs.forEach(peg -> {
+            if(peg.isEmpty() != false) {
+                leftoverPeg.add(peg);
+
+        });
+        return leftoverPeg;
+        }
+    }
+
     void didStart() {
         // create the state
         List<Circle> circles = Arrays.asList(Peg0, Peg1, Peg2, Peg3, Peg4, Peg5, Peg6, Peg7, Peg8, Peg9, Peg10, Peg11, Peg12, Peg13, Peg14);
@@ -481,4 +507,6 @@ public class PegSolitaireController{
             });
         });
     }
+
+
 }
