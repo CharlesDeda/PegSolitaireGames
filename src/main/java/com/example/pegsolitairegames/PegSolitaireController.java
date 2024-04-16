@@ -146,14 +146,17 @@ public class PegSolitaireController{
         //find higher row & column value and subtract 1, highest value peg and middle difference peg is removed (white), first goes to blue
         System.out.println("rowID: " + second.getRow());
 
+
         middlePeg = pegBetween(first, second);
+        System.out.println("Middle peg" + middlePeg.getRow() + middlePeg.getColumn());
         first.isEmpty = true;
         first.updateCircle();
+
         middlePeg.isEmpty = true;
         middlePeg.updateCircle();
+
         second.isEmpty = false;
         second.updateCircle();
-
 
         first.isSelected = false;
         second.isSelected = false;
@@ -172,24 +175,24 @@ public class PegSolitaireController{
     }
 
     Peg pegBetween(Peg first, Peg second) {
-        Peg cPeg = new Peg();
+        Peg middlePeg = new Peg();
         int maxColumn = 0;
         int maxRow = 0;
         if (first.getRow() == second.getRow() & first.getColumn() != second.getColumn()) {
             maxColumn = Math.max(first.getColumn(), second.getColumn());
-            cPeg.setColumn(maxColumn-1);
-            cPeg.setRow(first.getRow());
+            middlePeg.setColumn(maxColumn-1);
+            middlePeg.setRow(first.getRow());
         } else if (first.getRow() != second.getRow() & first.getColumn() == second.getColumn()) {
             maxRow = Math.max(first.getRow(), second.getRow());
-            cPeg.setColumn(first.getColumn());
-            cPeg.setRow(maxRow-1);
+            middlePeg.setColumn(first.getColumn());
+            middlePeg.setRow(maxRow-1);
         } else {
             maxRow = Math.max(first.getRow(), second.getRow());
             maxColumn = Math.max(first.getColumn(), second.getColumn());
-            cPeg.setColumn(maxColumn-1);
-            cPeg.setRow(maxRow-1);
+            middlePeg.setColumn(maxColumn-1);
+            middlePeg.setRow(maxRow-1);
         }
-        return cPeg;
+        return middlePeg;
     }
     // this func is called when a peg is clicked upon
     void pegClicked(String id) {

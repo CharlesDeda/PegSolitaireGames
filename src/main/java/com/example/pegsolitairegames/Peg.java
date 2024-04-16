@@ -6,6 +6,7 @@ import javafx.scene.shape.Circle;
 // This is our data structure to keep together the ui peg and some state that goes with it.
 public class Peg {
     public int row;
+    public String id;
     public int column;
     public Circle circle;
 
@@ -21,13 +22,15 @@ public class Peg {
     public String getId() {
         return circle.getId();
     }
-    
+
     public int getRow() {
         return Integer.parseInt("0" + circle.getId().charAt(0));
     }
     public int getColumn() {
         return Integer.parseInt("0" + circle.getId().charAt(2));
     }
+
+    public void setId(String ID) {return this.id = id;} 
 
     public void setRow(int row) {this.row = row;}
     public void setColumn(int column) {
