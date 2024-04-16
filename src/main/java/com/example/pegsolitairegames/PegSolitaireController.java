@@ -139,6 +139,21 @@ public class PegSolitaireController{
     // trick here is to find the middle peg
     // if we can find the middle we play
     // if we can't we reset one and 2 to not selected
+
+    // is there another peg selected other than this selected
+    // play scenario
+    // click once and set the first peg
+    // click again and potentially set the first selection
+    // click again and potentially set the second selection
+    // now you can play
+
+    // option 1, we derive first and second from the pegs array
+    // option 2, we can use another variable to contain these
+    // option 3, use 2 variables
+    // and finally we have 2 we can play and return
+    // otherwise we continue
+    // play(first, second);
+
     void play(Peg first, Peg second) {
         // TODO:
         // be default we are not finding the middle
@@ -151,6 +166,7 @@ public class PegSolitaireController{
             if ((first.getId().equals("0-0") & second.getId().equals("0-2"))){
                 pegs.get("0-1").isEmpty = true;
                 pegs.get("0-1").updateCircle();
+                decrementScore();
             }
             else{
                 pegs.get("1-0").isEmpty = true;
@@ -400,14 +416,6 @@ public class PegSolitaireController{
         second.updateCircle();
         firstAndSecond.clear();
 
-
-
-
-        // TODO: find the middle, based on first and second and pegs
-        // if no middle we can't do shit
-        // if middle is found we make it empty, the second become not empty, the first become empty
-
-
     }
 
     // this func is called when a peg is clicked upon
@@ -431,19 +439,7 @@ public class PegSolitaireController{
             return;
         }
 
-        // is there another peg selected other than this selected
-        // play scenario
-        // click once and set the first peg
-        // click again and potentially set the first selection
-        // click again and potentially set the second selection
-        // now you can play
 
-        // option 1, we derive first and second from the pegs array
-        // option 2, we can use another variable to contain these
-        // option 3, use 2 variables
-        // and finally we have 2 we can play and return
-        // otherwise we continue
-        // play(first, second);
 
         selectedPeg.toggle();
         selectedPeg.updateCircle();
@@ -464,15 +460,9 @@ public class PegSolitaireController{
         }
     }
 
-    // We have layed out the UI using SceneBuilder
-    // The first thing we do is to set up our data structures that will be used in the rest of the time
-    // It is all about data structures and further more we have to connect UI elements such as Peg0 with our
-    // data structures
-    //
 
-    int decrementScore(){
-        return Integer.parseInt(GameScoreLabel.getText()) - 1;
-    }
+    int decrementScore() {return Integer.parseInt(GameScoreLabel.getText()) - 1;}
+
     void didStart() {
         // create the state
         List<Circle> circles = Arrays.asList(Peg0, Peg1, Peg2, Peg3, Peg4, Peg5, Peg6, Peg7, Peg8, Peg9, Peg10, Peg11, Peg12, Peg13, Peg14);
