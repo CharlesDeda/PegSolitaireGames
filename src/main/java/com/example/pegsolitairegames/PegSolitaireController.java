@@ -145,7 +145,16 @@ public class PegSolitaireController{
         System.out.println("play first: " + first.getId() + " second: " + second.getId());
         //find higher row & column value and subtract 1, highest value peg and middle difference peg is removed (white), first goes to blue
         System.out.println("rowID: " + second.getRow());
+
         middlePeg = pegBetween(first, second);
+        first.isEmpty = true;
+        first.updateCircle();
+        middlePeg.isEmpty = true;
+        middlePeg.updateCircle();
+        second.isEmpty = false;
+        second.updateCircle();
+
+
         first.isSelected = false;
         second.isSelected = false;
         first.updateCircle();
@@ -166,21 +175,19 @@ public class PegSolitaireController{
         Peg cPeg = new Peg();
         int maxColumn = 0;
         int maxRow = 0;
-        for (int i = 0; i < pegsCheck.size(); i++) {
-            if (first.getRow() == second.getRow() & first.getColumn() != second.getColumn()) {
-                maxColumn = Math.max(first.getColumn(), second.getColumn());
-                cPeg.setColumn(maxColumn-1);
-                cPeg.setRow(first.getRow());
-            } else if (first.getRow() != second.getRow() & first.getColumn() == second.getColumn()) {
-                maxRow = Math.max(first.getRow(), second.getRow());
-                cPeg.setColumn(first.getColumn());
-                cPeg.setRow(maxRow-1);
-            } else {
-                maxRow = Math.max(first.getRow(), second.getRow());
-                maxColumn = Math.max(first.getColumn(), second.getColumn());
-                cPeg.setColumn(maxColumn-1);
-                cPeg.setRow(maxRow-1);
-            }
+        if (first.getRow() == second.getRow() & first.getColumn() != second.getColumn()) {
+            maxColumn = Math.max(first.getColumn(), second.getColumn());
+            cPeg.setColumn(maxColumn-1);
+            cPeg.setRow(first.getRow());
+        } else if (first.getRow() != second.getRow() & first.getColumn() == second.getColumn()) {
+            maxRow = Math.max(first.getRow(), second.getRow());
+            cPeg.setColumn(first.getColumn());
+            cPeg.setRow(maxRow-1);
+        } else {
+            maxRow = Math.max(first.getRow(), second.getRow());
+            maxColumn = Math.max(first.getColumn(), second.getColumn());
+            cPeg.setColumn(maxColumn-1);
+            cPeg.setRow(maxRow-1);
         }
         return cPeg;
     }

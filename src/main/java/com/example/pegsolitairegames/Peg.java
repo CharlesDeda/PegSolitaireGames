@@ -21,6 +21,7 @@ public class Peg {
     public String getId() {
         return circle.getId();
     }
+    
     public int getRow() {
         return Integer.parseInt("0" + circle.getId().charAt(0));
     }
