@@ -19,15 +19,20 @@ public class Peg {
     // this will be of the shape 1-1 or x-y
     // the x token is the row, the y token is the column
 
+    public Peg(Circle circle) {
+        this.circle = circle;
+        this.row = Integer.parseInt("0" + circle.getId().charAt(0));
+        this.column = Integer.parseInt("0" + circle.getId().charAt(2));
+    }
     public String getId() {
         return circle.getId();
     }
 
     public int getRow() {
-        return Integer.parseInt("0" + circle.getId().charAt(0));
+        return row;
     }
     public int getColumn() {
-        return Integer.parseInt("0" + circle.getId().charAt(2));
+        return column;
     }
 
     public void setId(String ID) {this.id = id;}

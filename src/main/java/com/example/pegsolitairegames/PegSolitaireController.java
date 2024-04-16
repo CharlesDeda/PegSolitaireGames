@@ -127,7 +127,6 @@ public class PegSolitaireController{
     ArrayList<Peg> firstAndSecond = new ArrayList<Peg>();
     //https://www.baeldung.com/java-hashmap
     HashMap<String, Peg> pegs = new HashMap<String, Peg>();
-    ArrayList<Peg> pegsCheck = new ArrayList<Peg>();
 
 
     // we have made 2 selections and we need to run the play
@@ -145,8 +144,22 @@ public class PegSolitaireController{
         //find higher row & column value and subtract 1, highest value peg and middle difference peg is removed (white), first goes to blue
         System.out.println("rowID: " + second.getRow());
 
-
         Peg middlePeg = pegBetween(first, second);
+
+        if (middlePeg == null || middlePeg.isEmpty) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return;
+        }
+//        for(int i = 0; i < pegs.size(); i++) {
+//
+//            pegs.get(middlePeg.getRow() + "-" + middlePeg.getColumn()).isEmpty = true;
+//            pegs.get(middlePeg.getRow() + "-" + middlePeg.getColumn()).updateCircle();
+//        }
+
         System.out.println("Middle peg" + middlePeg.getRow() + middlePeg.getColumn());
         first.isEmpty = true;
         first.updateCircle();
@@ -174,24 +187,32 @@ public class PegSolitaireController{
     }
 
     Peg pegBetween(Peg first, Peg second) {
-        Peg middlePeg = new Peg();
+        // Peg middlePeg = new Peg();
         int maxColumn = 0;
         int maxRow = 0;
         if (first.getRow() == second.getRow() & first.getColumn() != second.getColumn()) {
             maxColumn = Math.max(first.getColumn(), second.getColumn());
-            middlePeg.setColumn(maxColumn-1);
-            middlePeg.setRow(first.getRow());
+            maxColumn -= 1;
+            maxRow = first.getRow();
         } else if (first.getRow() != second.getRow() & first.getColumn() == second.getColumn()) {
             maxRow = Math.max(first.getRow(), second.getRow());
-            middlePeg.setColumn(first.getColumn());
-            middlePeg.setRow(maxRow-1);
+            maxRow -= 1;
+            maxColumn = first.getColumn();
         } else {
             maxRow = Math.max(first.getRow(), second.getRow());
             maxColumn = Math.max(first.getColumn(), second.getColumn());
-            middlePeg.setColumn(maxColumn-1);
-            middlePeg.setRow(maxRow-1);
+            maxColumn -= 1;
+            maxRow -= 1;
         }
-        return middlePeg;
+
+        String pegid = maxRow + "-" +maxColumn;
+
+        Peg rv = pegs.get(pegid);
+
+        if (rv == null) {
+            System.out.println(pegid);
+        }
+        return rv;
     }
     // this func is called when a peg is clicked upon
     void pegClicked(String id) {
@@ -247,6 +268,9 @@ public class PegSolitaireController{
         }
     }
 
+    void validMoves() {
+        return;
+    }
     // We have layed out the UI using SceneBuilder
     // The first thing we do is to set up our data structures that will be used in the rest of the time
     // It is all about data structures and further more we have to connect UI elements such as Peg0 with our
@@ -257,13 +281,9 @@ public class PegSolitaireController{
         List<Circle> circles = Arrays.asList(Peg0, Peg1, Peg2, Peg3, Peg4, Peg5, Peg6, Peg7, Peg8, Peg9, Peg10, Peg11, Peg12, Peg13, Peg14);
         // set up the clicks
         circles.forEach(circle -> {
-            Peg newPeg = new Peg();
-            Peg pegCheck = new Peg();
+            Peg newPeg = new Peg(circle);
 
-            newPeg.circle = circle;
-            pegCheck.circle = circle;
             pegs.put(newPeg.getId(), newPeg);
-            pegsCheck.add(pegCheck);
             circle.setFill(newPeg.getColor());
             circle.setOnMouseClicked( event -> {
                 Circle clicked = (Circle)event.getSource();
