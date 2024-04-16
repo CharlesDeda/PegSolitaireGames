@@ -210,6 +210,7 @@ public class PegSolitaireController{
         Peg rv = pegs.get(pegid);
 
         if (rv == null) {
+            // we should not really get here
             System.out.println(pegid);
         }
         return rv;

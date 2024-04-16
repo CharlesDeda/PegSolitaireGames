@@ -35,12 +35,6 @@ public class Peg {
         return column;
     }
 
-    public void setId(String ID) {this.id = id;}
-
-    public void setRow(int row) {this.row = row;}
-    public void setColumn(int column) {
-        this.column = column;
-    }
 
     public void toggle() {
         isSelected = !isSelected;
