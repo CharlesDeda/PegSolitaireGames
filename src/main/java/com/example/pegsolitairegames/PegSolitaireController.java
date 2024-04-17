@@ -154,11 +154,14 @@ public class PegSolitaireController{
             firstAndSecond.clear();
             return;
         }
-//        for(int i = 0; i < pegs.size(); i++) {
-//
-//            pegs.get(middlePeg.getRow() + "-" + middlePeg.getColumn()).isEmpty = true;
-//            pegs.get(middlePeg.getRow() + "-" + middlePeg.getColumn()).updateCircle();
-//        }
+        if (first == null || first.isEmpty) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return;
+        }
 
         System.out.println("Middle peg" + middlePeg.getRow() + middlePeg.getColumn());
         first.isEmpty = true;
