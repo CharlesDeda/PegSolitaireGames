@@ -1,6 +1,8 @@
 package com.example.pegsolitairegames;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -112,6 +114,9 @@ public class PegSolitaireController{
 
     @FXML
     private Text scoreCounter;
+
+    @FXML
+    private Button resetButton;
 
 
 
@@ -285,7 +290,16 @@ public class PegSolitaireController{
         scoreCounter.setText(String.valueOf(scoreCounter.getId()));
     }
 
+//    void reset() {
+//        resetButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent mouseEvent) {
+//
+//            }
+//        });
+//    }
     void gameOver() {
+
         return;
     }
     // We have layed out the UI using SceneBuilder

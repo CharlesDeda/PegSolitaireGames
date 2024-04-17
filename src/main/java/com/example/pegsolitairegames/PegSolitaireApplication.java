@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public class PegSolitaireApplication extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
         URL url = PegSolitaireApplication.class.getResource("pegSolitaire.fxml");
