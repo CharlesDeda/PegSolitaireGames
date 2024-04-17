@@ -4,6 +4,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pegsolitairegames.PegSolitaireController">
    <children>
@@ -82,6 +84,14 @@
             <Circle id="3-0" fx:id="Peg1" fill="DODGERBLUE" layoutX="53.0" layoutY="36.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
-      <Label fx:id="GameScore" alignment="CENTER" layoutX="23.0" layoutY="14.0" prefHeight="32.0" prefWidth="50.0" text="Score" />
+      <Label fx:id="GameScore" alignment="CENTER" layoutX="23.0" layoutY="14.0" prefHeight="32.0" prefWidth="50.0" text="Score">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Text id="15" fx:id="scoreCounter" layoutX="73.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" wrappingWidth="50.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

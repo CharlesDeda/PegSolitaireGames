@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 import java.util.*;
 
@@ -109,6 +110,9 @@ public class PegSolitaireController{
     @FXML
     private Circle Peg2;
 
+    @FXML
+    private Text scoreCounter;
+
 
 
     // Create list of pegs
@@ -173,6 +177,8 @@ public class PegSolitaireController{
         second.isEmpty = false;
         second.updateCircle();
 
+        decrementScore();
+
         first.isSelected = false;
         second.isSelected = false;
         first.updateCircle();
@@ -236,6 +242,7 @@ public class PegSolitaireController{
             initialPeg = selectedPeg;
             initialPeg.isEmpty = true;
             initialPeg.updateCircle();
+            decrementScore();
             return;
         }
 
@@ -272,7 +279,13 @@ public class PegSolitaireController{
         }
     }
 
-    void validMoves() {
+    void decrementScore() {
+        int score = Integer.parseInt(scoreCounter.getId());
+        scoreCounter.setId(String.valueOf(score-1));
+        scoreCounter.setText(String.valueOf(scoreCounter.getId()));
+    }
+
+    void gameOver() {
         return;
     }
     // We have layed out the UI using SceneBuilder
