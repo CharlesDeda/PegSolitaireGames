@@ -232,6 +232,7 @@ public class PegSolitaireController{
     }
     // this func is called when a peg is clicked upon
     void pegClicked(String id) {
+
         System.out.println("pegClicked id: " + id);
         // find the peg at this id, there should be just one.
         Peg selectedPeg = pegs.get(id);
@@ -291,14 +292,20 @@ public class PegSolitaireController{
         scoreCounter.setText(String.valueOf(scoreCounter.getId()));
     }
 
-//    void reset() {
-//        resetButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent mouseEvent) {
-//
-//            }
-//        });
-//    }
+    void resetScore() {
+        int score = 16;
+        scoreCounter.setId(String.valueOf(score-1));
+        scoreCounter.setText(String.valueOf(scoreCounter.getId()));
+    }
+
+    void setResetButtonAction() {
+        resetButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                didStart();
+            }
+        });
+    }
     void gameOver(HashMap<String, Peg> pegs) {
         pegs.forEach((id, peg) -> {
             if (!peg.isEmpty) {
@@ -321,6 +328,13 @@ public class PegSolitaireController{
     // data structures
     //
     void didStart() {
+        // reset all state
+        pegs.clear();
+        firstAndSecond.clear();
+        initialPeg = null;
+        setResetButtonAction();
+        resetScore();
+
         // create the state
         List<Circle> circles = Arrays.asList(Peg0, Peg1, Peg2, Peg3, Peg4, Peg5, Peg6, Peg7, Peg8, Peg9, Peg10, Peg11, Peg12, Peg13, Peg14);
         // set up the clicks
@@ -328,7 +342,7 @@ public class PegSolitaireController{
             Peg newPeg = new Peg(circle);
 
             pegs.put(newPeg.getId(), newPeg);
-            circle.setFill(newPeg.getColor());
+            newPeg.updateCircle();
             circle.setOnMouseClicked( event -> {
                 Circle clicked = (Circle)event.getSource();
                 String id = clicked.getId();
