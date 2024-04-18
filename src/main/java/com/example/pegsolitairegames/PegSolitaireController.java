@@ -134,6 +134,7 @@ public class PegSolitaireController{
     Peg initialPeg;
 
     ArrayList<Peg> firstAndSecond = new ArrayList<Peg>();
+    
     //https://www.baeldung.com/java-hashmap
     HashMap<String, Peg> pegs = new HashMap<String, Peg>();
 
@@ -298,8 +299,20 @@ public class PegSolitaireController{
 //            }
 //        });
 //    }
-    void gameOver() {
+    void gameOver(HashMap<String, Peg> pegs) {
+        pegs.forEach((id, peg) -> {
+            if (!peg.isEmpty) {
+                if (peg.isEmpty) {
 
+                }
+            } else{ return; }
+        });
+//        for each peg
+//        if peg.isempty == false {
+//        if surrounding pegs.isempty
+//         alertmenu displaying score
+//         }
+//         else{ return }
         return;
     }
     // We have layed out the UI using SceneBuilder
