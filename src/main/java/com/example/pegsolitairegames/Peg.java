@@ -40,7 +40,7 @@ public class Peg {
         isSelected = !isSelected;
     }
 
-    public Color getColor() {
+    private Color getColor() {
         if (isEmpty) {
             return Color.WHITE;
         } else {
