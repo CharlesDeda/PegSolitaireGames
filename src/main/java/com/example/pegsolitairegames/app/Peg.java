@@ -1,4 +1,4 @@
-package com.example.pegsolitairegames;
+package com.example.pegsolitairegames.app;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;

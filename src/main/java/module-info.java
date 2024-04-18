@@ -8,4 +8,6 @@ module com.example.pegsolitairegames {
 
     opens com.example.pegsolitairegames to javafx.fxml;
     exports com.example.pegsolitairegames;
+    exports com.example.pegsolitairegames.app;
+    opens com.example.pegsolitairegames.app to javafx.fxml;
 }
