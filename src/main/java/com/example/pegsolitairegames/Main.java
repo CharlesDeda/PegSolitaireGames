@@ -8,15 +8,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
-public class PegSolitaireApplication extends Application {
+public class Main extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
-        URL url = PegSolitaireApplication.class.getResource("pegSolitaire.fxml");
+        URL url = Main.class.getResource("pegSolitaire.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(url);
 
         Scene scene = new Scene(fxmlLoader.load(),600,400);
 
-        PegSolitaireController controller = (PegSolitaireController)fxmlLoader.getController();
+        GameManager controller = (GameManager)fxmlLoader.getController();
 
         controller.didStart();
         stage.setTitle("Peg Solitaire Game");

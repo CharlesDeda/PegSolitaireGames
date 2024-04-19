@@ -3,23 +3,33 @@ package com.example.pegsolitairegames;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-// This is our data structure to keep together the ui peg and some state that goes with it.
+/*
+ This is our data structure to keep together the ui peg and some state that goes with it.
+ Peg contains 6 instance variables, row, column, id, circle, isSelected, and isEmpty
+ Id is the ID of a circle in the scenebuilder UI, and from this we extrapolate the row and column numbers.
+ isSelected indicates when a peg is clicked on, or stationary
+ isEmpty indicates if a peg on the board does not exist and can be moved to
+ */
 public class Peg {
 
     public int row;
     public int column;
 
+    public int row;
+    public String id;
+    public int column;
     public Circle circle;
 
     public boolean isSelected = false;
 
-    // the first peg is empty
-    // and a peg becomes empty or not as we play the game
-    // initially they are all not empty
     public boolean isEmpty = false;
-    // this will be of the shape 1-1 or x-y
-    // the x token is the row, the y token is the column
 
+
+    public Peg(Circle circle) {
+        this.circle = circle;
+        this.row = Integer.parseInt("0" + circle.getId().charAt(0));
+        this.column = Integer.parseInt("0" + circle.getId().charAt(2));
+    }
     public String getId() {
         return circle.getId();
     }
@@ -34,6 +44,10 @@ public class Peg {
     public void setRow(int row) {this.row = row;}
     public void setColumn(int column) {
         this.column = column;
+        return row;
+    }
+    public int getColumn() {
+        return column;
     }
 
 
@@ -41,7 +55,10 @@ public class Peg {
         isSelected = !isSelected;
     }
 
-    public Color getColor() {
+    /*
+    getColor returns a color based on the state of the peg
+     */
+    private Color getColor() {
         if (isEmpty) {
             return Color.WHITE;
         } else {
@@ -53,8 +70,12 @@ public class Peg {
         }
     }
 
+    /*
+    Update circle changes the color of a peg based on its current state
+     */
     public void updateCircle() {
         circle.setFill(this.getColor());
     }
+
 
 }
