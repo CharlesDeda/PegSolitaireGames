@@ -118,42 +118,28 @@ public class GameManager {
 
 
 
-    // Create list of pegs
-    //TODO:
-    // after the app starts you need to put all the pegs into an array or list
-    //
-    // let pegs = [Peg0, Peg1, ...]
-    //
-    // implement a toggle, each time i click in a peg it turn blue if red and red if blue
-    // this is the toggle logic
-    //To start game, click first peg -> goes white
-
-    // application state
+    // initialPeg is the peg the user chooses to select from the gameBoard, which allows them to begin playing
     Peg initialPeg;
 
+    //this arrayList is built to contain our first selected and second selected pegs to utilize in the play func
     ArrayList<Peg> firstAndSecond = new ArrayList<Peg>();
     
     //https://www.baeldung.com/java-hashmap
+    //this hashmap contains our board of pegs with ids starting from bottom left = "0-0" and top of diamond is "4-0"
     HashMap<String, Peg> pegs = new HashMap<String, Peg>();
 
 
-    // we have made 2 selections and we need to run the play
-    // if i can play one becomes empty
-    // peg two becomes not empty and blue
-    // peg in the middle is empty
-    // trick here is to find the middle peg
-    // if we can find the middle we play
-    // if we can't we reset one and 2 to not selected
+    /*
+    play function is the game logic, update circles based on current state and what user is inputting.
+    to begin playing, we need to grab the middle peg based on our first and second selections, with this func called we now have the pegs in which state must be updated
+    first selected isEmpty, middlePeg isEmpty, and finally secondPeg !isSelected (full)
+
+     */
     void play(Peg first, Peg second) {
-        // TODO:
-        // be default we are not finding the middle
-        // so this code will have to be properly implemented
-        System.out.println("play first: " + first.getId() + " second: " + second.getId());
-        //find higher row & column value and subtract 1, highest value peg and middle difference peg is removed (white), first goes to blue
-        System.out.println("rowID: " + second.getRow());
 
         Peg middlePeg = pegBetween(first, second);
 
+        //if our middlePeg is already empty we cannot make the move, so clear everything and return
         if (middlePeg == null || middlePeg.isEmpty) {
             first.isSelected = false;
             second.isSelected = false;
@@ -162,6 +148,8 @@ public class GameManager {
             firstAndSecond.clear();
             return;
         }
+
+        //if the peg selected isEmpty, we just leave clear everything and return
         if (first == null || first.isEmpty) {
             first.isSelected = false;
             second.isSelected = false;
@@ -171,18 +159,18 @@ public class GameManager {
             return;
         }
 
-        System.out.println("Middle peg" + middlePeg.getRow() + middlePeg.getColumn());
+        //updating our state
         first.isEmpty = true;
         first.updateCircle();
-
         middlePeg.isEmpty = true;
         middlePeg.updateCircle();
-
         second.isEmpty = false;
         second.updateCircle();
 
+        //updating score
         decrementScore();
 
+        //clearing our state
         first.isSelected = false;
         second.isSelected = false;
         first.updateCircle();
@@ -190,13 +178,19 @@ public class GameManager {
         firstAndSecond.clear();
 
 
-
-
-
-
     }
 
+    /*
+    pegBetween calculates which peg is being jumped over on the board
+    using some simple matrix calculations, it can be assumed that there are 3 states
+    if row is same but column is different, calculate middle peg by subtracting 1 from the column with a higher value
+    if row is different but row is different, calculate middle peg by subtracting 1 from the row with a higher value
+    if row is different and  column is different, calculate middle peg by subtracting 1 from both the row and column with a higher value
+    these values are calculated, and then using a hashmap with those values we grab the id straight from our map of pegs
+    this peg is then returned
+     */
     Peg pegBetween(Peg first, Peg second) {
+
         // Peg middlePeg = new Peg();
         int maxColumn = 0;
         int maxRow = 0;
@@ -217,18 +211,23 @@ public class GameManager {
 
         String pegid = maxRow + "-" +maxColumn;
 
-        Peg rv = pegs.get(pegid);
+        Peg middlePeg = pegs.get(pegid);
 
-        if (rv == null) {
+        if (middlePeg == null) {
             // we should not really get here
             System.out.println(pegid);
         }
-        return rv;
+        return middlePeg;
     }
-    // this func is called when a peg is clicked upon
+
+    /*
+    pegClicked is called each time a peg is clicked upon
+    the selectedPeg is grabbed from our hashmap Pegs and then set
+    once a peg is selected, we toggle its state, and it is added to our arrayList firstAndSecond
+    once two pegs have been added to the list, we call play
+     */
     void pegClicked(String id) {
 
-        System.out.println("pegClicked id: " + id);
         // find the peg at this id, there should be just one.
         Peg selectedPeg = pegs.get(id);
 
@@ -248,57 +247,50 @@ public class GameManager {
             return;
         }
 
-        // is there another peg selected other than this selected
-        // play scenario
-        // click once and set the first peg
-        // click again and potentially set the first selection
-        // click again and potentially set the second selection
-        // now you can play
-
-        // option 1, we derive first and second from the pegs array
-        // option 2, we can use another variable to contain these
-        // option 3, use 2 variables
-        // and finally we have 2 we can play and return
-        // otherwise we continue
-        // play(first, second);
-
+        //updating selectedPegs color to indicate to user they are playing
         selectedPeg.toggle();
         selectedPeg.updateCircle();
 
-        // if selectedPeg.isSelected and not in the array, add it
-        // if not and in the array, remove it
+        //adding our pegs to firstAndSecond for playing
         if (selectedPeg.isSelected && !firstAndSecond.contains(selectedPeg)) {
             firstAndSecond.add(selectedPeg);
         }
+        //make sure we do not click on the same one
         if (!selectedPeg.isSelected && firstAndSecond.contains(selectedPeg)) {
             firstAndSecond.remove(selectedPeg);
         }
 
-        // if the array has 2 items, play
+        // if the arraylist has 2 items, play
         if (firstAndSecond.size() == 2) {
             play(firstAndSecond.get(0), firstAndSecond.get(1));
             return;
         }
     }
 
+    /*
+    decrement score grabs the inital score, and decrements by 1
+    this is called each time a new peg is emptied
+     */
     void decrementScore() {
         int score = Integer.parseInt(scoreCounter.getId());
         scoreCounter.setId(String.valueOf(score-1));
         scoreCounter.setText(String.valueOf(scoreCounter.getId()));
     }
 
-    void reset() {
-        resetButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
 
 
+    /*
+    reset score is part of our reset logic, when the player wants to start over we have to initialize the score back to 15
+     */
     void resetScore() {
         int score = 16;
         scoreCounter.setId(String.valueOf(score-1));
         scoreCounter.setText(String.valueOf(scoreCounter.getId()));
     }
 
+    /*
+    setResetButtonAction handles a mouseclick event on the reset button, when clicked we call didStart and restart the game
+     */
     void setResetButtonAction() {
         resetButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -307,27 +299,13 @@ public class GameManager {
             }
         });
     }
-    void gameOver(HashMap<String, Peg> pegs) {
-        pegs.forEach((id, peg) -> {
-            if (!peg.isEmpty) {
-                if (peg.isEmpty) {
 
-                }
-            } else{ return; }
-        });
-//        for each peg
-//        if peg.isempty == false {
-//        if surrounding pegs.isempty
-//         alertmenu displaying score
-//         }
-//         else{ return }
-        return;
-    }
-    // We have layed out the UI using SceneBuilder
-    // The first thing we do is to set up our data structures that will be used in the rest of the time
-    // It is all about data structures and further more we have to connect UI elements such as Peg0 with our
-    // data structures
-    //
+
+    /*
+    didStart intializes our state, we build a hashmap of pegs and foreach peg, we can handle some mouseclick event
+    in this initialization we have the ability to reset everything as well
+    each peg has an id, and this id is sent to the other funcs to allow easy state management
+     */
     void didStart() {
         // reset all state
         pegs.clear();

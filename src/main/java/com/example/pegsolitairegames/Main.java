@@ -18,7 +18,6 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load(),600,400);
 
         GameManager controller = (GameManager)fxmlLoader.getController();
-        Game controller2 =  (Game)fxmlLoader.getController();
 
         controller.didStart();
         stage.setTitle("Peg Solitaire Game");
