@@ -15,9 +15,8 @@ public class Peg {
     public int row;
     public int column;
 
-    public int row;
+
     public String id;
-    public int column;
     public Circle circle;
 
     public boolean isSelected = false;
@@ -34,22 +33,16 @@ public class Peg {
         return circle.getId();
     }
 
-    public int getRow() {
-        return Integer.parseInt("0" + circle.getId().charAt(0));
-    }
-    public int getColumn() {
-        return Integer.parseInt("0" + circle.getId().charAt(2));
-    }
 
-    public void setRow(int row) {this.row = row;}
-    public void setColumn(int column) {
-        this.column = column;
-        return row;
-    }
+
+
     public int getColumn() {
         return column;
     }
 
+    public int getRow() {
+        return row;
+    }
 
     public void toggle() {
         isSelected = !isSelected;
