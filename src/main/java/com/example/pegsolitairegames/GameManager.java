@@ -2,7 +2,9 @@ package com.example.pegsolitairegames;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -134,8 +136,8 @@ public class GameManager {
     play function is the game logic, update circles based on current state and what user is inputting.
     to begin playing, we need to grab the middle peg based on our first and second selections, with this func called we now have the pegs in which state must be updated
     first selected isEmpty, middlePeg isEmpty, and finally secondPeg !isSelected (full)
-
      */
+
     void play(Peg first, Peg second) {
 
         Peg middlePeg = pegBetween(first, second);
@@ -159,6 +161,7 @@ public class GameManager {
             firstAndSecond.clear();
             return;
         }
+
 
         //updating our state
         first.isEmpty = true;
@@ -315,12 +318,13 @@ public class GameManager {
                 })
                 .collect(Collectors.toList());
 
-        System.out.println("remaining " + remaining);
+
 
         for (int i = 0; i < remaining.size(); i++) {
             for (int j = i+1; j < remaining.size(); j++) {
                 if (pegBetween(remaining.get(i), remaining.get(j)) != null) {
                     //if we return here that means we are still getting moves
+                    System.out.println("remaining " + remaining);
                     return;
                 }
             }
@@ -328,6 +332,11 @@ public class GameManager {
 
         // if we get here game is over
         //what is left in this func is just figuring out what to do once we have no moves left (some game over alert)
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Winning Confirmation Box");
+        alert.setContentText("You won (I think?) ");
+        Optional<ButtonType> result = alert.showAndWait();
+        System.out.println("We made it here 4 realz");
         return;
     }
 
