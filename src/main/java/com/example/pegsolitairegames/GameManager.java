@@ -184,7 +184,7 @@ public class GameManager {
     pegBetween calculates which peg is being jumped over on the board
     using some simple matrix calculations, it can be assumed that there are 3 states
     if row is same but column is different, calculate middle peg by subtracting 1 from the column with a higher value
-    if row is different but row is different, calculate middle peg by subtracting 1 from the row with a higher value
+    if row is different but column is same, calculate middle peg by subtracting 1 from the row with a higher value
     if row is different and  column is different, calculate middle peg by subtracting 1 from both the row and column with a higher value
     these values are calculated, and then using a hashmap with those values we grab the id straight from our map of pegs
     this peg is then returned
