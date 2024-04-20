@@ -11,6 +11,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class GameManager {
 
@@ -213,6 +214,9 @@ public class GameManager {
 
         Peg middlePeg = pegs.get(pegid);
 
+        if ((middlePeg != null) & (middlePeg.isEmpty)) {
+            middlePeg = null;
+        }
         if (middlePeg == null) {
             // we should not really get here
             System.out.println(pegid);
@@ -295,11 +299,34 @@ public class GameManager {
         resetButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                didStart();
+                endGame();
             }
         });
     }
 
+    void endGame() {
+        // 1 find all pegs that are not isempty
+        // 2 see if there is a move available
+
+        List<Peg> remaining = pegs.values().stream()
+                .filter(peg -> {
+                    return !peg.isEmpty;
+                })
+                .collect(Collectors.toList());
+
+        System.out.println("remaining " + remaining);
+
+        for (int i = 0; i < remaining.size(); i++) {
+            for (int j = i+1; j < remaining.size(); j++) {
+                if (pegBetween(remaining.get(i), remaining.get(j)) != null) {
+                    return;
+                }
+            }
+        }
+
+        // if we get here game is over
+        return;
+    }
 
     /*
     didStart intializes our state, we build a hashmap of pegs and foreach peg, we can handle some mouseclick event
