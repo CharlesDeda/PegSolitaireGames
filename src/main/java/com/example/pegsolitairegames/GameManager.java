@@ -308,6 +308,7 @@ public class GameManager {
         // 1 find all pegs that are not isempty
         // 2 see if there is a move available
 
+        //this reads the same as adding all non-empty pegs to some list remaining
         List<Peg> remaining = pegs.values().stream()
                 .filter(peg -> {
                     return !peg.isEmpty;
@@ -319,12 +320,14 @@ public class GameManager {
         for (int i = 0; i < remaining.size(); i++) {
             for (int j = i+1; j < remaining.size(); j++) {
                 if (pegBetween(remaining.get(i), remaining.get(j)) != null) {
+                    //if we return here that means we are still getting moves
                     return;
                 }
             }
         }
 
         // if we get here game is over
+        //what is left in this func is just figuring out what to do once we have no moves left (some game over alert)
         return;
     }
 
