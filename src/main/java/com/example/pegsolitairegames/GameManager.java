@@ -11,6 +11,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import java.util.*;
+import java.util.function.BiConsumer;
 
 public class GameManager {
 
@@ -117,13 +118,15 @@ public class GameManager {
     private Button resetButton;
 
 
-
     // initialPeg is the peg the user chooses to select from the gameBoard, which allows them to begin playing
     Peg initialPeg;
 
     //this arrayList is built to contain our first selected and second selected pegs to utilize in the play func
     ArrayList<Peg> firstAndSecond = new ArrayList<Peg>();
-    
+
+    // this arrayList is build to contain all the empty pegs on the board.
+    ArrayList<Peg> empty = new ArrayList<Peg>();
+
     //https://www.baeldung.com/java-hashmap
     //this hashmap contains our board of pegs with ids starting from bottom left = "0-0" and top of diamond is "4-0"
     HashMap<String, Peg> pegs = new HashMap<String, Peg>();
@@ -177,6 +180,8 @@ public class GameManager {
         second.updateCircle();
         firstAndSecond.clear();
 
+        endGame();
+
 
     }
 
@@ -209,7 +214,7 @@ public class GameManager {
             maxRow -= 1;
         }
 
-        String pegid = maxRow + "-" +maxColumn;
+        String pegid = maxRow + "-" + maxColumn;
 
         Peg middlePeg = pegs.get(pegid);
 
@@ -230,6 +235,7 @@ public class GameManager {
 
         // find the peg at this id, there should be just one.
         Peg selectedPeg = pegs.get(id);
+
 
         if (selectedPeg == null) {
             // bail early
@@ -265,6 +271,8 @@ public class GameManager {
             play(firstAndSecond.get(0), firstAndSecond.get(1));
             return;
         }
+
+
     }
 
     /*
@@ -273,10 +281,9 @@ public class GameManager {
      */
     void decrementScore() {
         int score = Integer.parseInt(scoreCounter.getId());
-        scoreCounter.setId(String.valueOf(score-1));
+        scoreCounter.setId(String.valueOf(score - 1));
         scoreCounter.setText(String.valueOf(scoreCounter.getId()));
     }
-
 
 
     /*
@@ -284,7 +291,7 @@ public class GameManager {
      */
     void resetScore() {
         int score = 16;
-        scoreCounter.setId(String.valueOf(score-1));
+        scoreCounter.setId(String.valueOf(score - 1));
         scoreCounter.setText(String.valueOf(scoreCounter.getId()));
     }
 
@@ -322,12 +329,127 @@ public class GameManager {
 
             pegs.put(newPeg.getId(), newPeg);
             newPeg.updateCircle();
-            circle.setOnMouseClicked( event -> {
-                Circle clicked = (Circle)event.getSource();
+            circle.setOnMouseClicked(event -> {
+                Circle clicked = (Circle) event.getSource();
                 String id = clicked.getId();
 
                 pegClicked(id);
             });
+        });
+    }
+
+    /*
+    This method is meant to go through each peg and checks the surrounding pegs to determine if there are any valid moves.
+    If there are no pegs next to it, you can assume no moves for that peg.
+     */
+    void endGame() {
+
+        pegs.forEach((key, peg) -> {
+            boolean cond1 = false;
+            boolean cond2 = false;
+            boolean cond3 = false;
+            boolean cond4 = false;
+            int row = peg.getRow();
+            int column = peg.getColumn();
+
+
+            if (peg.isEmpty) {
+                empty.add(peg);
+            }
+
+
+            String pegid1 = (row) + "-" + (column + 1);
+            String pegid2 = (row + 1) + "-" + (column);
+            String pegid3 = (row - 1) + "-" + (column);
+            String pegid4 = (row) + "-" + (column - 1);
+
+            if (peg.getRow() == 0) {
+                if (pegs.get(pegid1).isEmpty || pegs.get(pegid1).getRow() >= 0 & pegs.get(pegid1).getRow() <= 4 &
+                        pegs.get(pegid1).getColumn() >= 0 & pegs.get(pegid1).getColumn() <= 4) {
+                    cond1 = true;
+                }
+            } else if (peg.getRow() == 1) {
+
+                if (pegs.get(pegid2).isEmpty || pegs.get(pegid2).getRow() >= 0 & pegs.get(pegid2).getRow() <= 4 &
+                        pegs.get(pegid2).getColumn() >= 0 & pegs.get(pegid2).getColumn() <= 3) {
+                    cond2 = true;
+                }
+            } else if (peg.getRow() == 2) {
+                if (pegs.get(pegid3).isEmpty || pegs.get(pegid3).getRow() >= 0 & pegs.get(pegid3).getRow() <= 4 &
+                        pegs.get(pegid3).getColumn() >= 0 & pegs.get(pegid3).getColumn() <= 2) {
+                    cond3 = true;
+                }
+            } else if (peg.getRow() == 3) {
+                if (pegs.get(pegid4).isEmpty || pegs.get(pegid4).getRow() >= 0 & pegs.get(pegid4).getRow() <= 4 &
+                        pegs.get(pegid4).getColumn() >= 0 & pegs.get(pegid4).getColumn() <= 1) {
+                    cond4 = true;
+
+                }
+            } else if (peg.getRow() == 4) {
+                if (pegs.get(pegid4).isEmpty || pegs.get(pegid4).getRow() >= 0 & pegs.get(pegid4).getRow() <= 4 &
+                        pegs.get(pegid4).getColumn() >= 0 & pegs.get(pegid4).getColumn() <= 0) {
+                    cond4 = true;
+                }
+            }
+            if (cond1 == true & cond2 == true & cond3 == true & cond4 == true) {
+                System.out.print("banans");
+            }
+            /*
+            // Check right (+1 to row)
+            int row = peg.getRow();
+            int column = peg.getColumn();
+
+            // check left (-1 to row) where row is greater than or equal to 0)
+            int plusID = row + 1;
+            int negRow = row - 1;
+            int plusCol = column + 1;
+            int negCol = column - 1;
+
+            if (peg.getId().isEmpty() )
+
+            // diagonal (+1, +1) row and column where row and column is positive or 0 or row <= 4 column <= 5
+
+            // diagonal left (-1, +1) row and column
+
+            // diagonal leftDown (-1, -1) row and column
+
+            // diagonal rightDown (+1, -1) row and column
+
+            // check above (+1 to column)
+
+            // check below (-1 to column)
+
+
+            if (first.getRow()  & first.getColumn() != second.getColumn()) {
+                maxColumn = Math.max(first.getColumn(), second.getColumn());
+                maxColumn -= 1;
+                maxRow = first.getRow();
+            } else if (first.getRow() != second.getRow() & first.getColumn() == second.getColumn()) {
+                maxRow = Math.max(first.getRow(), second.getRow());
+                maxRow -= 1;
+                maxColumn = first.getColumn();
+            } else {
+                maxRow = Math.max(first.getRow(), second.getRow());
+                maxColumn = Math.max(first.getColumn(), second.getColumn());
+                maxColumn -= 1;
+                maxRow -= 1;
+            }
+
+            String pegid = maxRow + "-" +maxColumn;
+
+            Peg middlePeg = pegs.get(pegid);
+
+            if (middlePeg == null) {
+                // we should not really get here
+                System.out.println(pegid);
+            }
+            return middlePeg;
+        });
+
+         if (empty.size() == 14) {
+             System.out.print("We made it");
+         }
+        */
         });
     }
 }
