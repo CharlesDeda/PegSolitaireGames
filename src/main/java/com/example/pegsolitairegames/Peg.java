@@ -3,6 +3,8 @@ package com.example.pegsolitairegames;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+import java.lang.reflect.Array;
+
 /*
  This is our data structure to keep together the ui peg and some state that goes with it.
  Peg contains 6 instance variables, row, column, id, circle, isSelected, and isEmpty
@@ -16,27 +18,36 @@ public class Peg {
     public int column;
     public Circle circle;
 
+    // no circle
+    public boolean isHidden = true;
     public boolean isSelected = false;
-
     public boolean isEmpty = false;
-
 
     public Peg(Circle circle) {
         this.circle = circle;
-        this.row = Integer.parseInt("0" + circle.getId().charAt(0));
-        this.column = Integer.parseInt("0" + circle.getId().charAt(2));
-    }
-    public String getId() {
-        return circle.getId();
+        this.id = circle.getId();
+        String[] tokens = id.split("-");
+        this.row = Integer.parseInt("0" + tokens[0]);
+        this.column = Integer.parseInt("0" + tokens[1]);
+        this.isHidden = false;
     }
 
+    public Peg(int row, int column) {
+        this.row = row;
+        this.column = column;
+        this.id = row + "-" + column;
+        this.isHidden = true;
+
+    }
+    public String getId() {
+        return id;
+    }
     public int getRow() {
         return row;
     }
     public int getColumn() {
         return column;
     }
-
 
     public void toggle() {
         isSelected = !isSelected;
