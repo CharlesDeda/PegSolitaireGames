@@ -151,7 +151,6 @@ public class PegSolitaireController {
 
         //some logic to correct bug on 1,1 3,0
         if (first.getRow() == 1 & first.getColumn() == 1 & second.getRow() == 3 & second.getColumn() == 0) {
-            System.out.print("Are we getting here?");
             first.isSelected = false;
             second.isSelected = false;
             first.updateCircle();
@@ -162,7 +161,6 @@ public class PegSolitaireController {
 
         //some logic to correct bug on 1,2 3,1
         if (first.getRow() == 1 & first.getColumn() == 2 & second.getRow() == 3 & second.getColumn() == 1) {
-            System.out.print("Are we getting here?");
             first.isSelected = false;
             second.isSelected = false;
             first.updateCircle();
@@ -173,7 +171,6 @@ public class PegSolitaireController {
 
         //some logic to correct bug on 0,1 2,0
         if (first.getRow() == 0 & first.getColumn() == 1 & second.getRow() == 2 & second.getColumn() == 0) {
-            System.out.print("Are we getting here?");
             first.isSelected = false;
             second.isSelected = false;
             first.updateCircle();
@@ -184,7 +181,6 @@ public class PegSolitaireController {
 
         //some logic to correct bug on 0,3 2,2
         if (first.getRow() == 0 & first.getColumn() == 3 & second.getRow() == 2 & second.getColumn() == 2) {
-            System.out.print("Are we getting here?");
             first.isSelected = false;
             second.isSelected = false;
             first.updateCircle();
@@ -205,7 +201,6 @@ public class PegSolitaireController {
 
         //some logic to correct bug on 1,2 2,1
         if (first.getRow() == 0 & first.getColumn() == 2 & second.getRow() == 2 & second.getColumn() == 1) {
-            System.out.print("Are we getting here?");
             first.isSelected = false;
             second.isSelected = false;
             first.updateCircle();
@@ -216,7 +211,6 @@ public class PegSolitaireController {
 
         //some logic to correct bug on 2,1 4,0
         if (first.getRow() == 2 & first.getColumn() == 1 & second.getRow() == 4 & second.getColumn() == 0) {
-            System.out.print("Are we getting here?");
             first.isSelected = false;
             second.isSelected = false;
             first.updateCircle();
