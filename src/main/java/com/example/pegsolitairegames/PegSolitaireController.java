@@ -2,7 +2,9 @@ package com.example.pegsolitairegames;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -368,6 +370,31 @@ public class PegSolitaireController {
         resetButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Winning Confirmation Box");
+                if (scoreCounter.getId().equals("5")) {
+                    alert.setContentText("Nice try... I think? Your score is:  " + scoreCounter.getId());
+                }
+                else if (scoreCounter.getId().equals("4")) {
+                    alert.setContentText("Close only counts in horseshoes and grenades:  " + scoreCounter.getId());
+                }
+                else if (scoreCounter.getId().equals("3")) {
+                    alert.setContentText("Skill issue:  " + scoreCounter.getId());
+                }
+                else if (scoreCounter.getId().equals("2")) {
+                    alert.setContentText("Close but no cigar:  " + scoreCounter.getId());
+                }
+                else if (scoreCounter.getId().equals("1")) {
+                    alert.setContentText("You win! Get a life. Your score is:  " + scoreCounter.getId());
+                }
+                else if (scoreCounter.getId().equals("10")) {
+                    alert.setContentText("Somehow this is more impressive than winning. Your score is: " + scoreCounter.getId());
+                }
+                else {
+                    alert.setContentText("I assume you gave up, please uninstall. Your score is:  " + scoreCounter.getId());
+                }
+                Optional<ButtonType> result = alert.showAndWait();
+                System.out.println("gz");
                 didStart();
             }
         });
