@@ -141,6 +141,39 @@ public class PegSolitaireController {
 
         Peg middlePeg = pegBetween(first, second);
 
+        int minColumn = Math.min(first.getRow(), second.getRow());
+        int minRow = Math.min(first.getColumn(), second.getColumn());
+
+        if (!second.isEmpty) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return;
+        }
+
+
+        //some logic to correct bug on moves out of bounds
+        if (first.getRow() > second.getRow() + 2 || second.getRow() > first.getRow()+2) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return;
+        }
+
+        //some logic to correct bug on moves out of bounds
+        if (first.getColumn() > second.getColumn() + 2 || second.getColumn() > first.getColumn()+ 2) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return;
+        }
+
         //if our middlePeg is already empty we cannot make the move, so clear everything and return
         if (middlePeg == null || middlePeg.isEmpty) {
             first.isSelected = false;
@@ -153,6 +186,45 @@ public class PegSolitaireController {
 
         //some logic to correct bug on 1,1 3,0
         if (first.getRow() == 1 & first.getColumn() == 1 & second.getRow() == 3 & second.getColumn() == 0) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return ;
+        }
+        //some logic to correct bug on 2,2 0,0
+        if (first.getRow() == 2 & first.getColumn() == 2 & second.getRow() == 0 & second.getColumn() == 0) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return ;
+        }
+
+        //some logic to correct bug on 2,2 0,1
+        if (first.getRow() == 2 & first.getColumn() == 2 & second.getRow() == 0 & second.getColumn() == 1) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return ;
+        }
+
+        //some logic to correct bug on 3,1 1,0
+        if (first.getRow() == 3 & first.getColumn() == 1 & second.getRow() == 1 & second.getColumn() == 0) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return ;
+        }
+
+        //some logic to correct bug on 2,2 1,0
+        if (first.getRow() == 2 & first.getColumn() == 2 & second.getRow() == 1 & second.getColumn() == 0) {
             first.isSelected = false;
             second.isSelected = false;
             first.updateCircle();
@@ -200,6 +272,7 @@ public class PegSolitaireController {
             firstAndSecond.clear();
             return;
         }
+
 
         //some logic to correct bug on 1,2 2,1
         if (first.getRow() == 0 & first.getColumn() == 2 & second.getRow() == 2 & second.getColumn() == 1) {
@@ -263,6 +336,8 @@ public class PegSolitaireController {
     this peg is then returned
      */
     Peg pegBetween(Peg first, Peg second) {
+
+
 
         // Peg middlePeg = new Peg();
         int maxColumn = 0;
