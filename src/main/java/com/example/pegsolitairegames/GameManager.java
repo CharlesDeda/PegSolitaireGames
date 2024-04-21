@@ -161,6 +161,85 @@ public class GameManager {
             firstAndSecond.clear();
             return;
         }
+        if (first.getRow() == 1 & first.getColumn() == 1 & second.getRow() == 3 & second.getColumn() == 0) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return ;
+        }
+
+        //some logic to correct bug on 1,2 3,1
+        if (first.getRow() == 1 & first.getColumn() == 2 & second.getRow() == 3 & second.getColumn() == 1) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return ;
+        }
+
+        //some logic to correct bug on 0,1 2,0
+        if (first.getRow() == 0 & first.getColumn() == 1 & second.getRow() == 2 & second.getColumn() == 0) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return ;
+        }
+
+        //some logic to correct bug on 0,3 2,2
+        if (first.getRow() == 0 & first.getColumn() == 3 & second.getRow() == 2 & second.getColumn() == 2) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return ;
+        }
+
+        //if the peg selected isEmpty, we just leave clear everything and return
+        if (first == null || first.isEmpty) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return;
+        }
+
+        //some logic to correct bug on 1,2 2,1
+        if (first.getRow() == 0 & first.getColumn() == 2 & second.getRow() == 2 & second.getColumn() == 1) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return ;
+        }
+
+        //some logic to correct bug on 2,1 4,0
+        if (first.getRow() == 2 & first.getColumn() == 1 & second.getRow() == 4 & second.getColumn() == 0) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return ;
+        }
+
+
+        //some logic to make sure we not skipping to a middle peg
+        if (second.getRow() == first.getRow()+1 || second.getColumn() == first.getColumn()+1) {
+            first.isSelected = false;
+            second.isSelected = false;
+            first.updateCircle();
+            second.updateCircle();
+            firstAndSecond.clear();
+            return;
+        }
 
 
         //updating our state
