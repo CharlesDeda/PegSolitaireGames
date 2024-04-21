@@ -15,8 +15,6 @@ public class Peg {
     public int row;
     public int column;
 
-
-    public String id;
     public Circle circle;
 
     public boolean isSelected = false;
@@ -29,6 +27,7 @@ public class Peg {
         this.row = Integer.parseInt("0" + circle.getId().charAt(0));
         this.column = Integer.parseInt("0" + circle.getId().charAt(2));
     }
+
     public String getId() {
         return circle.getId();
     }
