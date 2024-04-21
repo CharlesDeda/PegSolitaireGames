@@ -11,7 +11,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import java.util.*;
-import java.util.function.BiConsumer;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GameManager {
 
@@ -366,63 +366,175 @@ public class GameManager {
     This method is meant to go through each peg and checks the surrounding pegs to determine if there are any valid moves.
     If there are no pegs next to it, you can assume no moves for that peg.
      */
-    void endGame() {
+    boolean endGame() {
         System.out.println("matrix");
-
+        /*
         // find all pegs that are not isEmpty
         // than for each of these pegs use the matrix to find if there are moves
+        AtomicInteger counter = new AtomicInteger();
+//
+        pegs.forEach((key, peg) -> {
+            boolean cond1 = false;
+            boolean cond2 = false;
+            boolean cond3 = false;
+            boolean cond4 = false;
+            int idk = 0;
+            int row = peg.getRow();
+            int column = peg.getColumn();
 
-//
-//        pegs.forEach((key, peg) -> {
-//            boolean cond1 = false;
-//            boolean cond2 = false;
-//            boolean cond3 = false;
-//            boolean cond4 = false;
-//            int row = peg.getRow();
-//            int column = peg.getColumn();
-//
-//
-//            if (peg.isEmpty) {
-//                empty.add(peg);
-//            }
-//
-//
-//
-//            String pegid1 = (row) + "-" + (column + 1);
-//            String pegid2 = (row + 1) + "-" + (column);
-//            String pegid3 = (row - 1) + "-" + (column);
-//            String pegid4 = (row) + "-" + (column - 1);
-//
-//            if (pegs.get(pegid1).isEmpty || pegs.get(pegid1).getRow() >= 0 & pegs.get(pegid1).getRow() <= 4 &
-//                        pegs.get(pegid1).getColumn() >= 0 & pegs.get(pegid1).getColumn() <= 4) {
-//                    cond1 = true;
-//            }
-//            } else if (peg.getRow() == 1) {
-//
-//                if (pegs.get(pegid2).isEmpty || pegs.get(pegid2).getRow() >= 0 & pegs.get(pegid2).getRow() <= 4 &
-//                        pegs.get(pegid2).getColumn() >= 0 & pegs.get(pegid2).getColumn() <= 3) {
-//                    cond2 = true;
-//                }
-//            } else if (peg.getRow() == 2) {
-//                if (pegs.get(pegid3).isEmpty || pegs.get(pegid3).getRow() >= 0 & pegs.get(pegid3).getRow() <= 4 &
-//                        pegs.get(pegid3).getColumn() >= 0 & pegs.get(pegid3).getColumn() <= 2) {
-//                    cond3 = true;
-//                }
-//            } else if (peg.getRow() == 3) {
-//                if (pegs.get(pegid4).isEmpty || pegs.get(pegid4).getRow() >= 0 & pegs.get(pegid4).getRow() <= 4 &
-//                        pegs.get(pegid4).getColumn() >= 0 & pegs.get(pegid4).getColumn() <= 1) {
-//                    cond4 = true;
-//
-//                }
-//            } else if (peg.getRow() == 4) {
-//                if (pegs.get(pegid4).isEmpty || pegs.get(pegid4).getRow() >= 0 & pegs.get(pegid4).getRow() <= 4 &
-//                        pegs.get(pegid4).getColumn() >= 0 & pegs.get(pegid4).getColumn() <= 0) {
-//                    cond4 = true;
-//                }
-//            }
-//            if (cond1 == true & cond2 == true & cond3 == true & cond4 == true) {
-//                System.out.print("banans");
-//            }
+            String ogPeg = (row) + "-" + (column);
+
+            //if (peg.isEmpty) {
+            //    empty.add(peg);
+            //}
+
+
+            String pegid1 = (row) + "-" + (column + 1);
+            String pegid2 = (row + 1) + "-" + (column);
+            String pegid3 = (row - 1) + "-" + (column);
+            String pegid4 = (row) + "-" + (column - 1);
+
+            if (pegs.get(ogPeg).isEmpty){
+                idk += 1;
+            } else {
+                //if (pegs.get(ogPeg).getRow() == 0) {
+                if ((column + 1) <= 4 & row == 0) { // || ((column + 1) <= 4 & row == 1)) {
+                    if ((pegs.get(pegid1).isEmpty)) {
+                        idk += 1;
+                    }
+                } else if (column + 1 > 4 & row == 0) {  // || (((column + 1) > 3) & (row == 1))) {
+                    idk += 1;
+                }
+
+                if (column <= 3 & row + 1 == 1){
+                    if (pegs.get(pegid2).isEmpty){
+                        idk += 1;
+                    }
+                } else if (column > 3 & row + 1 == 1) {
+                    idk += 1;
+                }
+
+                if (column <= 3 & row == 2){
+                    if (pegs.get(pegid3).isEmpty){
+                        idk += 1;
+                    }
+                } else if (column > 3 & row + 1 == 1) {
+                    idk += 1;
+                }
+
+
+
+                if (pegs.get(ogPeg).getRow() == 1) {
+                if ((column) <= 3 & row + 1 == 2) { // || ((column) <= 4 & row + 1 == 2)) {
+                    if ((pegs.get(pegid2).isEmpty)) {
+                        idk += 1;
+                    }
+                } else if (((column) > 3 & row + 1 == 1 || ((column) > 2) & (row + 1 == 2)) || ((column + 2) > 3) & (row == 3)) {
+                    idk += 1;
+                }
+            }
+
+            if (pegs.get(ogPeg).getRow() == 1) {
+                if ((pegs.get(pegid2).getColumn() >= 0 || pegs.get(pegid2).getColumn() <= 4 & pegs.get(pegid2).getRow() == 0) ||
+                        (pegs.get(pegid2).getColumn() >= 0 || pegs.get(pegid2).getColumn() <= 3 & pegs.get(pegid2).getRow() == 1) ||
+                        (pegs.get(pegid2).getColumn() >= 0 || pegs.get(pegid2).getColumn() <= 2 & pegs.get(pegid2).getRow() == 2)) {
+                    if ((pegs.get(pegid2).isEmpty)) {
+                        idk += 1;
+                    }
+                } else if ((pegs.get(pegid2).getColumn() < 0 || pegs.get(pegid2).getColumn() > 4 & pegs.get(pegid2).getRow() == 0) ||
+                        (pegs.get(pegid2).getColumn() < 0 || pegs.get(pegid2).getColumn() > 3 & pegs.get(pegid2).getRow() == 1) ||
+                        (pegs.get(pegid2).getColumn() < 0 || pegs.get(pegid2).getColumn() > 2 & pegs.get(pegid2).getRow() == 2)) {
+
+                    idk += 1;
+                }
+            }
+
+            if (pegs.get(ogPeg).getRow() == 2) {
+                if ((pegs.get(pegid3).getColumn() >= 0 || pegs.get(pegid3).getColumn() <= 3 & pegs.get(pegid3).getRow() == 1) ||
+                        (pegs.get(pegid3).getColumn() >= 0 || pegs.get(pegid3).getColumn() <= 2 & pegs.get(pegid3).getRow() == 2) ||
+                        (pegs.get(pegid3).getColumn() >= 0 || pegs.get(pegid3).getColumn() <= 1 & pegs.get(pegid3).getRow() == 3)) {
+                    if ((pegs.get(pegid3).isEmpty)) {
+                        idk += 1;
+                    }
+                } else if ((pegs.get(pegid3).getColumn() < 0 || pegs.get(pegid3).getColumn() > 3 & pegs.get(pegid3).getRow() == 1) ||
+                        (pegs.get(pegid3).getColumn() < 0 || pegs.get(pegid3).getColumn() > 2 & pegs.get(pegid3).getRow() == 2) ||
+                        (pegs.get(pegid3).getColumn() < 0 || pegs.get(pegid3).getColumn() > 1 & pegs.get(pegid3).getRow() == 3)) {
+                    idk += 1;
+                }
+            }
+
+
+            if (pegs.get(ogPeg).getRow() == 3) {
+                if ((pegs.get(pegid4).getColumn() >= 0 || pegs.get(pegid4).getColumn() <= 2 & pegs.get(pegid4).getRow() == 2) ||
+                        (pegs.get(pegid4).getColumn() >= 0 || pegs.get(pegid4).getColumn() <= 1 & pegs.get(pegid4).getRow() == 3) ||
+                        (pegs.get(pegid4).getColumn() == 0 & pegs.get(pegid4).getRow() == 4)) {
+
+                    if ((pegs.get(pegid4).isEmpty)) {
+                        idk += 1;
+                    }
+                } else if ((pegs.get(pegid4).getColumn() < 0 || pegs.get(pegid4).getColumn() > 2 & pegs.get(pegid4).getRow() == 2) ||
+                        (pegs.get(pegid4).getColumn() < 0 || pegs.get(pegid4).getColumn() > 1 & pegs.get(pegid4).getRow() == 3) ||
+                        (pegs.get(pegid4).getColumn() != 0 & pegs.get(pegid4).getRow() == 4)) {
+                    idk += 1;
+                }
+            }
+            //if (cond1 == true & cond2 == true & cond3 == true & cond4 == true) {
+            //    int test = counter += 1;
+
+            //}
+            if (idk == 4){
+                counter.addAndGet(1);
+            }
+        });
+
+        if (counter.get() == 14) {
+            return true;
+        } else {
+            return false;
+        }
+        */
+        return false;
+    }
+}
+                /*
+
+                }else if ((pegs.get(pegid2).getColumn() < 0 || pegs.get(pegid2).getColumn() > 2 & pegs.get(pegid2).getRow() == 2) ||
+                        (pegs.get(pegid2).getColumn() < 0 || pegs.get(pegid2).getColumn() > 1 & pegs.get(pegid2).getRow() == 3) ||
+                        (pegs.get(pegid2).getColumn() == 0 & pegs.get(pegid2).getRow() == 4)){
+                    if((pegs.get(pegid4).isEmpty)) {
+                        cond1 = true;
+                    }}}
+
+                        if (pegs.get(pegid1).isEmpty || pegs.get(pegid1).getRow() >= 0 & pegs.get(pegid1).getRow() <= 4 &
+                        pegs.get(pegid1).getColumn() >= 0 & pegs.get(pegid1).getColumn() <= 4) {
+                    cond1 = true;
+            }
+            } else if (peg.getRow() == 1) {
+
+                if (pegs.get(pegid2).isEmpty || pegs.get(pegid2).getRow() >= 0 & pegs.get(pegid2).getRow() <= 4 &
+                        pegs.get(pegid2).getColumn() >= 0 & pegs.get(pegid2).getColumn() <= 3) {
+                    cond2 = true;
+                }
+            } else if (peg.getRow() == 2) {
+                if (pegs.get(pegid3).isEmpty || pegs.get(pegid3).getRow() >= 0 & pegs.get(pegid3).getRow() <= 4 &
+                        pegs.get(pegid3).getColumn() >= 0 & pegs.get(pegid3).getColumn() <= 2) {
+                    cond3 = true;
+                }
+            } else if (peg.getRow() == 3) {
+                if (pegs.get(pegid4).isEmpty || pegs.get(pegid4).getRow() >= 0 & pegs.get(pegid4).getRow() <= 4 &
+                        pegs.get(pegid4).getColumn() >= 0 & pegs.get(pegid4).getColumn() <= 1) {
+                    cond4 = true;
+
+                }
+            } else if (peg.getRow() == 4) {
+                if (pegs.get(pegid4).isEmpty || pegs.get(pegid4).getRow() >= 0 & pegs.get(pegid4).getRow() <= 4 &
+                        pegs.get(pegid4).getColumn() >= 0 & pegs.get(pegid4).getColumn() <= 0) {
+                    cond4 = true;
+                }
+            }
+            if (cond1 == true & cond2 == true & cond3 == true & cond4 == true) {
+                System.out.print("banans");
+            }
 //            /*
 //            // Check right (+1 to row)
 //            int row = peg.getRow();
@@ -479,7 +591,5 @@ public class GameManager {
 //             System.out.print("We made it");
 //         }
 //        */
-//        });
-    }
-}
+
 
