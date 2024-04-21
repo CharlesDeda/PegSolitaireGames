@@ -323,13 +323,14 @@ public class GameManager {
         for (int i = 0; i < remaining.size(); i++) {
             for (int j = i+1; j < remaining.size(); j++) {
                 if (pegBetween(remaining.get(i), remaining.get(j)) != null) {
+                    System.out.println("peg(i)" + remaining.get(i).getId() + "peg(j)" + remaining.get(j).getId());
                     //if we return here that means we are still getting moves
                     System.out.println("remaining " + remaining);
                     return;
                 }
             }
         }
-
+        System.out.print("We made it here");
         // if we get here game is over
         //what is left in this func is just figuring out what to do once we have no moves left (some game over alert)
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
