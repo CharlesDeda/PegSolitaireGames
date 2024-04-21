@@ -237,6 +237,8 @@ public class PegSolitaireController {
             return;
         }
 
+
+
         // configure the initial peg
         if (initialPeg == null) {
             // now the game can start
