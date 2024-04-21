@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
 
 import java.util.*;
 
-public class GameManager {
+public class PegSolitaireController {
 
     @FXML
     private AnchorPane AnchorPane;
